@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 240 10% 3.9%;
+        --foreground: 0 0% 98%;
+        --primary: 263.4 70% 50.4%;
+        --primary-foreground: 210 40% 98%;
+    }
+
+    body {
+        @apply bg-background text-foreground antialiased;
+        font-feature-settings: "rlig" 1, "calt" 1;
+    }
+}
+
+.gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-stacks-purple to-stacks-orange;
+}
+
+.hero-glow {
+    background: radial-gradient(circle at center, rgba(85, 70, 255, 0.15) 0%, transparent 70%);
+}

@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+      
+      - name: Install dependencies
+        run: pnpm install
+      
+      - name: Build
+        run: pnpm build
+      
+      - name: Run linter
+        run: pnpm lint --if-present
+      
+      - name: Run tests
+        run: pnpm test --if-present
+
+  test-cli:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      
+      - name: Install dependencies
+        run: pnpm install
+      
+      - name: Build CLI
+        run: pnpm build
+      
+      - name: Test CLI help
+        run: node packages/cli/dist/index.js --help
+      
+      - name: Test project generation
+        run: |
+          node packages/cli/dist/index.js test-project -y --skip-install --no-git
+          ls -la test-project
+          cat test-project/Clarinet.toml
+          ls -la test-project/frontend
+      
+      - name: Cleanup
+        run: rm -rf test-project
