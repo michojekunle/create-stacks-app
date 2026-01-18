@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { validateProjectName } from "./validation";
+import { validateProjectName } from "./validation.js";
 
 describe("validateProjectName", () => {
   it("should accept valid names", () => {

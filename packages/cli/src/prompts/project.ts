@@ -1,125 +1,139 @@
-import inquirer from 'inquirer';
-import type { ProjectConfig, CreateOptions, PackageManager } from '../types/index.js';
-import path from 'path';
+import inquirer from "inquirer";
+import type {
+  ProjectConfig,
+  CreateOptions,
+  PackageManager,
+} from "../types/index.js";
+import path from "path";
+import { detectPackageManager } from "../utils/package-manager.js";
 
 export async function runPrompts(
   projectName?: string,
-  options?: CreateOptions
+  options?: CreateOptions,
 ): Promise<ProjectConfig> {
+  const defaultPM = await detectPackageManager();
+
   const answers = await inquirer.prompt([
     {
-      type: 'input',
-      name: 'projectName',
-      message: 'Project name:',
-      default: projectName || 'my-stacks-app',
+      type: "input",
+      name: "projectName",
+      message: "Project name:",
+      default: projectName || "my-stacks-app",
       when: !projectName,
       validate: (input: string) => {
-        if (!input.trim()) return 'Project name is required';
+        if (!input.trim()) return "Project name is required";
         if (!/^[a-z0-9-]+$/.test(input)) {
-          return 'Project name must contain only lowercase letters, numbers, and hyphens';
+          return "Project name must contain only lowercase letters, numbers, and hyphens";
         }
-        if (input.startsWith('-') || input.endsWith('-')) {
-          return 'Project name cannot start or end with a hyphen';
+        if (input.startsWith("-") || input.endsWith("-")) {
+          return "Project name cannot start or end with a hyphen";
         }
         return true;
       },
     },
     {
-      type: 'list',
-      name: 'template',
-      message: 'Select a frontend framework:',
+      type: "list",
+      name: "template",
+      message: "Select a frontend framework:",
       choices: [
-        { name: 'Next.js (Recommended)', value: 'nextjs' },
-        { name: 'React', value: 'react' },
-        { name: 'Vue', value: 'vue' },
+        { name: "Next.js (Recommended)", value: "nextjs" },
+        { name: "React", value: "react" },
+        { name: "Vue", value: "vue" },
       ],
-      default: 'nextjs',
+      default: "nextjs",
       when: !options?.template,
     },
     {
-      type: 'confirm',
-      name: 'typescript',
-      message: 'Use TypeScript?',
+      type: "confirm",
+      name: "typescript",
+      message: "Use TypeScript?",
       default: true,
       when: options?.typescript === undefined,
     },
     {
-      type: 'checkbox',
-      name: 'contracts',
-      message: 'Select smart contracts to include:',
+      type: "checkbox",
+      name: "contracts",
+      message: "Select smart contracts to include:",
       choices: [
         {
-          name: 'Counter (Simple state management example)',
-          value: 'counter',
+          name: "Counter (Simple state management example)",
+          value: "counter",
           checked: true,
         },
         {
-          name: 'Token (SIP-010 fungible token)',
-          value: 'token',
+          name: "Token (SIP-010 fungible token)",
+          value: "token",
           checked: false,
         },
         {
-          name: 'NFT (SIP-009 non-fungible token)',
-          value: 'nft',
+          name: "NFT (SIP-009 non-fungible token)",
+          value: "nft",
           checked: false,
         },
       ],
       when: !options?.contracts,
     },
     {
-      type: 'confirm',
-      name: 'tailwind',
-      message: 'Include Tailwind CSS?',
+      type: "confirm",
+      name: "tailwind",
+      message: "Include Tailwind CSS?",
       default: true,
       when: options?.tailwind === undefined,
     },
     {
-      type: 'confirm',
-      name: 'git',
-      message: 'Initialize Git repository?',
+      type: "confirm",
+      name: "git",
+      message: "Initialize Git repository?",
       default: true,
       when: options?.git !== false,
     },
     {
-      type: 'list',
-      name: 'packageManager',
-      message: 'Package manager:',
+      type: "list",
+      name: "packageManager",
+      message: "Package manager:",
       choices: [
-        { name: 'pnpm (Recommended)', value: 'pnpm' },
-        { name: 'npm', value: 'npm' },
-        { name: 'yarn', value: 'yarn' },
+        { name: "pnpm (Recommended)", value: "pnpm" },
+        { name: "npm", value: "npm" },
+        { name: "yarn", value: "yarn" },
       ],
-      default: 'pnpm',
+      default: defaultPM,
       when: !options?.packageManager,
     },
   ]);
 
-  const finalProjectName = answers.projectName || projectName || 'my-stacks-app';
+  const finalProjectName =
+    answers.projectName || projectName || "my-stacks-app";
 
   return {
     projectName: finalProjectName,
     projectPath: path.resolve(process.cwd(), finalProjectName),
-    template: answers.template || options?.template || 'nextjs',
+    template: answers.template || options?.template || "nextjs",
     typescript: answers.typescript ?? options?.typescript ?? true,
-    contracts: answers.contracts || options?.contracts?.split(',') || ['counter'],
+    contracts: answers.contracts ||
+      options?.contracts?.split(",") || ["counter"],
     tailwind: answers.tailwind ?? options?.tailwind ?? true,
     git: answers.git ?? options?.git !== false,
-    packageManager: (answers.packageManager || options?.packageManager || 'pnpm') as PackageManager,
+    packageManager: (answers.packageManager ||
+      options?.packageManager ||
+      defaultPM) as PackageManager,
     skipInstall: options?.skipInstall || false,
   };
 }
 
-export function getDefaultConfig(projectName: string, options?: CreateOptions): ProjectConfig {
+export async function getDefaultConfig(
+  projectName: string,
+  options?: CreateOptions,
+): Promise<ProjectConfig> {
+  const defaultPM = await detectPackageManager();
   return {
     projectName,
     projectPath: path.resolve(process.cwd(), projectName),
-    template: (options?.template as 'nextjs' | 'react' | 'vue') || 'nextjs',
+    template: (options?.template as "nextjs" | "react" | "vue") || "nextjs",
     typescript: options?.typescript ?? true,
-    contracts: options?.contracts?.split(',') || ['counter'],
+    contracts: options?.contracts?.split(",") || ["counter"],
     tailwind: options?.tailwind ?? true,
     git: options?.git !== false,
-    packageManager: (options?.packageManager as PackageManager) || 'pnpm',
+    packageManager: (options?.packageManager as PackageManager) || defaultPM,
     skipInstall: options?.skipInstall || false,
   };
 }
-

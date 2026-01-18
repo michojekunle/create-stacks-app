@@ -1,15 +1,15 @@
-import { exec } from 'child_process';
-import { promisify } from 'util';
-import ora from 'ora';
-import type { PackageManager } from '../types/index.js';
+import { spawn } from "child_process";
+import { exec } from "child_process";
+import { promisify } from "util";
+import type { PackageManager } from "../types/index.js";
 
 const execAsync = promisify(exec);
 
 export async function detectPackageManager(): Promise<PackageManager> {
   const checks: Array<{ pm: PackageManager; command: string }> = [
-    { pm: 'pnpm', command: 'pnpm --version' },
-    { pm: 'yarn', command: 'yarn --version' },
-    { pm: 'npm', command: 'npm --version' },
+    { pm: "pnpm", command: "pnpm --version" },
+    { pm: "yarn", command: "yarn --version" },
+    { pm: "npm", command: "npm --version" },
   ];
 
   for (const { pm, command } of checks) {
@@ -21,31 +21,26 @@ export async function detectPackageManager(): Promise<PackageManager> {
     }
   }
 
-  return 'npm'; // fallback
+  return "npm"; // fallback
 }
 
 export async function installDependencies(
   projectPath: string,
-  pm: PackageManager
+  pm: PackageManager,
 ): Promise<void> {
-  const spinner = ora('Installing dependencies...').start();
+  console.log("Installing dependencies...");
 
   try {
-    const commands: Record<PackageManager, string> = {
-      npm: 'npm install',
-      pnpm: 'pnpm install',
-      yarn: 'yarn install',
-    };
-
     // Install root dependencies
-    await execAsync(commands[pm], { cwd: projectPath });
+    await runCommand(pm, ["install"], projectPath);
 
     // Install frontend dependencies
-    await execAsync(commands[pm], { cwd: `${projectPath}/frontend` });
+    // For frontend, we want to respect the package manager choice
+    await runCommand(pm, ["install"], `${projectPath}/frontend`);
 
-    spinner.succeed('Dependencies installed');
+    console.log("Dependencies installed");
   } catch (error) {
-    spinner.fail('Failed to install dependencies');
+    console.error("Failed to install dependencies");
     throw error;
   }
 }
@@ -58,4 +53,30 @@ export function getRunCommand(pm: PackageManager, script: string): string {
   };
 
   return commands[pm];
+}
+
+function runCommand(
+  command: string,
+  args: string[],
+  cwd: string,
+): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const child = spawn(command, args, {
+      cwd,
+      stdio: "inherit",
+      shell: true,
+    });
+
+    child.on("close", (code) => {
+      if (code !== 0) {
+        reject(new Error(`Command ${command} ${args.join(" ")} failed`));
+      } else {
+        resolve();
+      }
+    });
+
+    child.on("error", (err) => {
+      reject(err);
+    });
+  });
 }
