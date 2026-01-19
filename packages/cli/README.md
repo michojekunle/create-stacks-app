@@ -3,7 +3,6 @@
 The fastest way to build full-stack applications on Stacks blockchain.
 
 [![npm version](https://badge.fury.io/js/@devvmichael%2Fcreate-stacks-app.svg)](https://www.npmjs.com/package/@devvmichael/create-stacks-app)
-[![CI](https://github.com/michojekunle/create-stacks-app/actions/workflows/ci.yml/badge.svg)](https://github.com/michojekunle/create-stacks-app/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Quick Start
@@ -135,18 +134,6 @@ my-dapp/
 └── package.json
 ```
 
-## Available Scripts
-
-In a generated project:
-
-| Script                   | Description                          |
-| ------------------------ | ------------------------------------ |
-| `npm run dev`            | Start dev server (frontend + devnet) |
-| `npm run test`           | Run contract tests with Clarinet     |
-| `npm run build`          | Build frontend for production        |
-| `npm run deploy:testnet` | Deploy contracts to testnet          |
-| `npm run deploy:mainnet` | Deploy contracts to mainnet          |
-
 ## Smart Contract Templates
 
 ### Counter
@@ -182,22 +169,7 @@ Full SIP-009 compliant NFT with:
 
 ## Contributing
 
-Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) first.
-
-```bash
-# Clone the repo
-git clone https://github.com/michojekunle/create-stacks-app.git
-cd create-stacks-app
-
-# Install dependencies
-pnpm install
-
-# Build
-pnpm build
-
-# Test locally
-node packages/cli/dist/index.js my-test-project
-```
+Contributions are welcome! Please read our [Contributing Guide](../../CONTRIBUTING.md) first.
 
 ## Community
 
@@ -205,6 +177,10 @@ node packages/cli/dist/index.js my-test-project
 - [Stacks Forum](https://forum.stacks.org)
 - [Twitter @Stacks](https://twitter.com/stacks)
 
+## Author
+
+**Michael Ojekunle** - [@michojekunle](https://github.com/michojekunle)
+
 ## License
 
-MIT © [Michael Ojekunle]
+MIT © Michael Ojekunle

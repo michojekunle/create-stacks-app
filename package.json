@@ -1,7 +1,7 @@
 {
-  "name": "create-stacks-app-monorepo",
+  "name": "@devvmichael/create-stacks-app-monorepo",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "description": "Scaffold full-stack Stacks blockchain applications",
   "scripts": {
     "build": "turbo run build",

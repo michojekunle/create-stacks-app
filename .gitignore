@@ -3,3 +3,4 @@
 .next
 .DS_Store
 dist
+.npmrc

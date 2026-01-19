@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     "clarity",
     "smart contracts",
     "create-stacks-app",
+    "@devvmichael/create-stacks-app",
   ],
   authors: [{ name: "Michael Ojekunle" }],
   openGraph: {
