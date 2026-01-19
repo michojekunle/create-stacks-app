@@ -10,18 +10,18 @@
         "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts"
     },
     "dependencies": {
-        "@stacks/connect": "^7.8.2",
-        "@stacks/network": "^6.13.0",
-        "@stacks/transactions": "^6.13.1",
-        "vue": "^3.4.0"
+        "@stacks/connect": "^8.2.4",
+        "@stacks/network": "^7.3.1",
+        "@stacks/transactions": "^7.3.1",
+        "vue": "^3.5.13"
     },
     "devDependencies": {
-        "@vitejs/plugin-vue": "^4.5.2",
-        "autoprefixer": "^10.4.16",
-        "postcss": "^8.4.32",
-        "tailwindcss": "^3.3.6",
-        "typescript": "^5.3.3",
-        "vite": "^5.0.10",
-        "vue-tsc": "^1.8.25"
+        "@vitejs/plugin-vue": "^5.2.1",
+        "autoprefixer": "^10.4.20",
+        "postcss": "^8.4.49",
+        "tailwindcss": "^3.4.17",
+        "typescript": "^5.7.2",
+        "vite": "^6.1.0",
+        "vue-tsc": "^2.2.0"
     }
 }

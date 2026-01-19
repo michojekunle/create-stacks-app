@@ -1,31 +1,13 @@
-'use client';
+"use client";
 
-import { ReactNode } from 'react';
-import { Connect } from '@stacks/connect-react';
-import { userSession } from '@/lib/stacks';
+import { ReactNode } from "react";
 
 interface ProvidersProps {
   children: ReactNode;
 }
 
+// With Stacks Connect v8, no provider wrapper is needed
+// The connect() function handles wallet connection directly
 export function Providers({ children }: ProvidersProps) {
-  const appDetails = {
-    name: 'Stacks App',
-    icon: typeof window !== 'undefined' ? window.location.origin + '/logo.svg' : '/logo.svg',
-  };
-
-  return (
-    <Connect
-      authOptions={{
-        appDetails,
-        redirectTo: '/',
-        onFinish: () => {
-          window.location.reload();
-        },
-        userSession,
-      }}
-    >
-      {children}
-    </Connect>
-  );
+  return <>{children}</>;
 }

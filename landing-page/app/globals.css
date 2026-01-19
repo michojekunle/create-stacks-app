@@ -4,22 +4,38 @@
 
 @layer base {
     :root {
-        --background: 240 10% 3.9%;
+        --background: 0 0% 0%;
         --foreground: 0 0% 98%;
-        --primary: 263.4 70% 50.4%;
-        --primary-foreground: 210 40% 98%;
+        --accent: 220 70% 55%;
     }
 
     body {
-        @apply bg-background text-foreground antialiased;
+        @apply bg-black text-white antialiased font-sans;
         font-feature-settings: "rlig" 1, "calt" 1;
+    }
+
+    /* Font Assignments */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: var(--font-outfit), system-ui, sans-serif;
+    }
+
+    code,
+    pre {
+        font-family: var(--font-mono), monospace;
     }
 }
 
+/* Minimal gradient with subtle accent */
 .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-stacks-purple to-stacks-orange;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-200 to-blue-400;
 }
 
+/* Very subtle hero glow with accent tint */
 .hero-glow {
-    background: radial-gradient(circle at center, rgba(85, 70, 255, 0.15) 0%, transparent 70%);
+    background: radial-gradient(circle at center, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
 }

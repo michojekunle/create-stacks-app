@@ -11,6 +11,7 @@ import { createProjectStructure, copyBaseFiles } from "../utils/filesystem.js";
 import { initializeGit } from "../utils/git.js";
 
 import { initializeClarinet, updateClarinetConfig } from "../utils/clarinet.js";
+import { ensureClarinetInstalled } from "../utils/clarinet-installer.js";
 import {
   installFrontendTemplate,
   installContracts,
@@ -26,6 +27,17 @@ export async function createCommand(
 ): Promise<void> {
   try {
     showIntro();
+
+    // Check for Clarinet installation and prompt to install if needed
+    const clarinetReady = await ensureClarinetInstalled();
+    if (!clarinetReady) {
+      console.log();
+      logError("Clarinet is required to create a Stacks project.");
+      console.log("  Please install Clarinet and try again.");
+      console.log("  Visit: https://github.com/hirosystems/clarinet/releases");
+      console.log();
+      process.exit(1);
+    }
 
     // Get project configuration
     const config: ProjectConfig = await getProjectConfig(projectName, options);

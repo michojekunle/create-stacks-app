@@ -1,5 +1,5 @@
-import { network } from './stacks';
-import type { StacksNetwork } from '@stacks/network';
+import { network } from "./stacks";
+import type { StacksNetwork } from "@stacks/network";
 
 export interface ContractConfig {
   address: string;
@@ -8,22 +8,24 @@ export interface ContractConfig {
 }
 
 // Contract address from environment or default devnet address
-const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM';
+const contractAddress =
+  process.env.NEXT_PUBLIC_CONTRACT_ADDRESS ||
+  "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM";
 
 export const counterContract: ContractConfig = {
   address: contractAddress,
-  name: 'counter',
+  name: "counter",
   network,
 };
 
 export const tokenContract: ContractConfig = {
   address: contractAddress,
-  name: 'token',
+  name: "token",
   network,
 };
 
 export const nftContract: ContractConfig = {
   address: contractAddress,
-  name: 'nft',
+  name: "nft",
   network,
 };

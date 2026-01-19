@@ -67,13 +67,13 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white selection:bg-stacks-purple/30">
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-black/50 backdrop-blur-md">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-gray-900 bg-black/80 backdrop-blur-sm">
+        <div className="container mx-auto px-4 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-stacks-purple to-stacks-orange" />
-            <span className="font-bold text-lg">Create Stacks App</span>
+            <div className="w-6 h-6 rounded bg-blue-500" />
+            <span className="font-medium">Create Stacks App</span>
           </div>
-          <div className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-400">
+          <div className="hidden md:flex items-center gap-8 text-sm text-gray-500">
             <a href="#features" className="hover:text-white transition-colors">
               Features
             </a>
@@ -81,11 +81,11 @@ export default function Home() {
               Templates
             </a>
             <a href="/docs" className="hover:text-white transition-colors">
-              Documentation
+              Docs
             </a>
             <a
               href="https://github.com/michojekunle/create-stacks-app"
-              className="text-white hover:text-stacks-purple transition-colors"
+              className="text-white hover:text-gray-400 transition-colors"
             >
               GitHub
             </a>
