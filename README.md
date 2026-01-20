@@ -51,13 +51,13 @@ npx @devvmichael/create-stacks-app
 npx @devvmichael/create-stacks-app my-dapp [options]
 
 Options:
-  -t, --template <name>      Frontend template: nextjs, react, vue (default: nextjs)
+  -t, --template <name>      Frontend template: nextjs, react, vue
   -c, --contracts <list>     Contracts to include: counter,token,nft
   --typescript               Use TypeScript (default: true)
   --no-typescript            Use JavaScript
   --tailwind                 Include Tailwind CSS (default: true)
   --no-git                   Skip Git initialization
-  --package-manager <pm>     Package manager: npm, pnpm, yarn (default: pnpm)
+  --package-manager <pm>     Package manager: npm, pnpm, yarn
   --skip-install             Skip dependency installation
   -y, --yes                  Skip prompts, use defaults
 ```

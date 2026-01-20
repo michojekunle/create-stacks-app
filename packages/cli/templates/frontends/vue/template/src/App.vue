@@ -1,12 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { AppConfig, UserSession, showConnect } from '@stacks/connect';
+import { connect, disconnect, getLocalStorage } from '@stacks/connect';
 import { StacksTestnet, StacksMainnet } from '@stacks/network';
 import AppHeader from './components/AppHeader.vue';
 import CounterInteraction from './components/CounterInteraction.vue';
-
-const appConfig = new AppConfig(['store_write', 'publish_data']);
-const userSession = new UserSession({ appConfig });
 
 const network =
   import.meta.env.VITE_NETWORK === 'mainnet'
@@ -16,29 +13,30 @@ const network =
 const address = ref<string | null>(null);
 
 onMounted(() => {
-  if (userSession.isUserSignedIn()) {
-    const userData = userSession.loadUserData();
-    const networkKey = import.meta.env.VITE_NETWORK === 'mainnet' ? 'mainnet' : 'testnet';
-    address.value = userData.profile.stxAddress[networkKey];
+  const storage = getLocalStorage();
+  const networkKey = import.meta.env.VITE_NETWORK === 'mainnet' ? 'mainnet' : 'testnet';
+  if (storage?.addresses?.[networkKey]) {
+    address.value = storage.addresses[networkKey];
   }
 });
 
-function handleConnect() {
-  showConnect({
-    appDetails: {
-      name: 'Stacks App',
-      icon: window.location.origin + '/logo.svg',
-    },
-    redirectTo: '/',
-    onFinish: () => {
+async function handleConnect() {
+  try {
+    const response = await connect();
+    const userAddress = response.addresses?.[0]?.address;
+    if (userAddress) {
+      address.value = userAddress;
       window.location.reload();
-    },
-    userSession,
-  });
+    }
+  } catch (error) {
+    console.error('Failed to connect:', error);
+  }
 }
 
 function handleDisconnect() {
-  userSession.signUserOut('/');
+  disconnect();
+  address.value = null;
+  window.location.reload();
 }
 </script>
 
