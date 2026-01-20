@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { openContractCall } from '@stacks/connect';
+import { request } from '@stacks/connect';
 import { callReadOnlyFunction, cvToValue } from '@stacks/transactions';
 import type { StacksNetwork } from '@stacks/network';
 
@@ -29,7 +29,8 @@ async function fetchCounter() {
       senderAddress: contractAddress,
     });
     const value = cvToValue(result);
-    counter.value = value?.value ?? 0;
+    // Handle both bigint (Stacks returns bigint now often) and number types safely
+    counter.value = value?.value ? Number(value.value) : 0;
   } catch (error) {
     console.error('Failed to fetch counter:', error);
   } finally {
@@ -45,16 +46,15 @@ async function handleIncrement() {
   if (!props.senderAddress) return;
   isIncrementing.value = true;
   try {
-    await openContractCall({
-      contractAddress,
-      contractName,
+    await request('stx_callContract', {
+      contract: `${contractAddress}.${contractName}`,
       functionName: 'increment',
       functionArgs: [],
-      network: props.network,
-      onFinish: () => {
-        setTimeout(fetchCounter, 2000);
-      },
+      postConditions: [],
     });
+    
+    // Speculatively refetch
+    setTimeout(fetchCounter, 2000);
   } catch (error) {
     console.error('Increment failed:', error);
   } finally {
@@ -66,16 +66,14 @@ async function handleDecrement() {
   if (!props.senderAddress) return;
   isDecrementing.value = true;
   try {
-    await openContractCall({
-      contractAddress,
-      contractName,
+    await request('stx_callContract', {
+      contract: `${contractAddress}.${contractName}`,
       functionName: 'decrement',
       functionArgs: [],
-      network: props.network,
-      onFinish: () => {
-        setTimeout(fetchCounter, 2000);
-      },
+      postConditions: [],
     });
+    
+    setTimeout(fetchCounter, 2000);
   } catch (error) {
     console.error('Decrement failed:', error);
   } finally {
@@ -89,7 +87,7 @@ async function handleDecrement() {
     <h2 class="text-2xl font-bold mb-4">Counter Contract</h2>
 
     <div class="mb-6 text-center">
-      <div class="text-6xl font-bold text-stacks-purple">
+      <div class="text-6xl font-bold text-gray-100">
         {{ isLoading ? '...' : counter }}
       </div>
       <p class="text-sm text-gray-500 mt-2">Current count</p>
