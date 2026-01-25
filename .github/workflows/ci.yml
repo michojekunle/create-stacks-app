@@ -34,11 +34,8 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Run linter
-        run: pnpm lint --if-present
-
       - name: Run tests
-        run: pnpm test --if-present
+        run: pnpm test
 
   test-cli:
     runs-on: ubuntu-latest

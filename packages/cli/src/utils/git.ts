@@ -15,9 +15,9 @@ export async function initializeGit(projectPath: string): Promise<void> {
     });
 
     spinner.succeed('Git repository initialized');
-  } catch (error) {
+  } catch (error: unknown) {
     spinner.fail('Failed to initialize Git repository');
     // Non-fatal error, just warn
-    console.warn('Git initialization failed. You can initialize it manually.');
+    console.warn('Git initialization failed. You can initialize it manually.', (error as Error).message);
   }
 }
