@@ -166,7 +166,7 @@ async function createRootPackageJson(
   projectPath: string,
   config: ProjectConfig
 ): Promise<void> {
-  const { projectName, packageManager } = config;
+  const { projectName } = config;
 
   const packageJson = {
     name: projectName,
