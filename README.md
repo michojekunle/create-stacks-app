@@ -207,4 +207,4 @@ node packages/cli/dist/index.js my-test-project
 
 ## License
 
-MIT © [Michael Ojekunle]
+MIT © [A M D](https://x.com/devvmichael)
