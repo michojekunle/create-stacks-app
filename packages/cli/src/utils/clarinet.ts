@@ -28,7 +28,9 @@ export async function initializeClarinet(config: ProjectConfig): Promise<void> {
 
     // Run clarinet new in temp directory
     try {
-      await execAsync(`cd "${tempDir}" && clarinet new "${projectName}"`);
+      await execAsync(
+        `cd "${tempDir}" && echo "n" | clarinet new "${projectName}"`,
+      );
     } catch (e) {
       // If clarinet new fails, it might be because of directory structure
       // specific error handling could be added here

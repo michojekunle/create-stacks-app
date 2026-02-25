@@ -24,6 +24,10 @@ npm run dev
 - 🧪 **Testing setup included** - Clarinet SDK tests for contracts
 - 📦 **Deployment scripts** - One-command deploy to testnet/mainnet
 
+### 🗺 Roadmap
+
+Looking to see where the project is heading? Check out our [3-6 Month Roadmap](ROADMAP.md) to see planned features like sBTC support, turborepo integration, and AI smart contract boilerplate gen!
+
 ## Installation
 
 ```bash
