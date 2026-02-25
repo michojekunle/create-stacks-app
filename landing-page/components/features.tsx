@@ -56,9 +56,9 @@ export function Features() {
           {features.map((feature, i) => (
             <div
               key={i}
-              className="p-6 rounded-xl border border-gray-900 hover:border-blue-500/30 transition-colors group"
+              className="p-6 rounded-xl border border-gray-900 hover:border-gray-600 transition-colors group"
             >
-              <feature.icon className="w-8 h-8 text-blue-400 mb-4 group-hover:text-blue-300 transition-colors" />
+              <feature.icon className="w-8 h-8 text-white mb-4 group-hover:text-stacks-orange transition-colors" />
               <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
               <p className="text-gray-400 text-sm leading-relaxed">
                 {feature.description}

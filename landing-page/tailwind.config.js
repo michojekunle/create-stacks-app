@@ -21,7 +21,7 @@ module.exports = {
         stacks: {
           purple: "#5546FF",
           dark: "#0D0D10",
-          orange: "#FF5C36",
+          orange: "#FF5500",
         },
       },
     },

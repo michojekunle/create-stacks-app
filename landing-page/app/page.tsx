@@ -1,6 +1,4 @@
 import { Hero } from "@/components/hero";
-import { Features } from "@/components/features";
-import { Templates } from "@/components/templates";
 import { CTA } from "@/components/cta";
 import { Footer } from "@/components/footer";
 import { Logo } from "@/components/logo";
@@ -71,17 +69,16 @@ export default function Home() {
       <nav className="fixed top-0 left-0 right-0 z-50 border-b border-gray-900 bg-black/80 backdrop-blur-sm">
         <div className="container mx-auto px-4 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Logo />
-            <span className="font-medium">Create Stacks App</span>
+            <Logo className="w-6 h-6 text-white" />
+            <span className="font-medium tracking-tight">
+              Create <span className="text-gray-400">Stacks</span> App
+            </span>
           </div>
-          <div className="hidden md:flex items-center gap-8 text-sm text-gray-500">
-            <a href="#features" className="hover:text-white transition-colors">
-              Features
-            </a>
-            <a href="#templates" className="hover:text-white transition-colors">
-              Templates
-            </a>
-            <a href="/docs" className="hover:text-white transition-colors">
+          <div className="hidden md:flex items-center gap-8 text-sm font-medium">
+            <a
+              href="/docs"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
               Docs
             </a>
             <a
@@ -95,8 +92,6 @@ export default function Home() {
       </nav>
 
       <Hero />
-      <Features />
-      <Templates />
       <CTA />
       <Footer />
     </main>

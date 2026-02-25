@@ -1,11 +1,16 @@
+import { Logo } from "@/components/logo";
+
 export function Footer() {
   return (
     <footer className="border-t border-gray-900 py-12">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded bg-blue-500" />
-            <span className="font-medium">Create Stacks App</span>
+            <Logo className="w-6 h-6 text-stacks-orange" />
+            <span className="font-medium flex items-center gap-1.5">
+              <span className="text-gray-100 tracking-tight">Create</span>{" "}
+              Stacks App
+            </span>
           </div>
 
           <div className="flex gap-8 text-sm text-gray-400">

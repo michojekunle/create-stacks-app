@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
+import { CopyButton } from "./copy-button";
 
 export function CTA() {
   return (
@@ -15,13 +16,16 @@ export function CTA() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <div className="flex items-center gap-3 bg-gray-900/50 border border-gray-800 px-5 py-3 rounded-lg font-mono text-sm text-gray-300">
-              <span className="text-blue-400">$</span>
-              npx @devvmichael/create-stacks-app my-dapp
+            <div className="flex items-center justify-between gap-4 bg-[#0c0c0c] border border-gray-800 px-5 py-3 rounded-xl font-mono text-sm text-gray-300 w-full sm:w-auto shadow-sm">
+              <div className="flex items-center gap-3">
+                <span className="text-stacks-orange">$</span>
+                npx @devvmichael/create-stacks-app my-dapp
+              </div>
+              <CopyButton text="npx @devvmichael/create-stacks-app my-dapp" />
             </div>
             <a
               href="/docs"
-              className="bg-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-600 transition-colors flex items-center gap-2 text-sm"
+              className="bg-white text-black px-8 py-3.5 rounded-xl font-medium shadow-lg hover:opacity-90 hover:shadow-white/10 hover:-translate-y-0.5 transition-all flex items-center gap-2 text-sm whitespace-nowrap"
             >
               Start Building <ArrowRight className="w-4 h-4" />
             </a>

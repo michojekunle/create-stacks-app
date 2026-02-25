@@ -1,156 +1,119 @@
+import { CopyButton } from "@/components/copy-button";
+
 export default function DocsPage() {
   return (
-    <div className="space-y-16">
-      <div className="space-y-6">
-        <h1 className="text-4xl lg:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500">
+    <div className="space-y-16 mt-8">
+      <div className="space-y-4">
+        <h1 className="text-4xl lg:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-stacks-orange to-stacks-orange drop-shadow-sm">
           Documentation
         </h1>
-        <p className="text-xl text-gray-400 max-w-2xl">
-          Complete guide to building production-ready Stacks applications with
-          Create Stacks App.
+        <p className="text-xl text-gray-400 max-w-2xl font-light">
+          Everything you need to build next-generation Stacks applications.
         </p>
       </div>
 
       <section id="getting-started" className="scroll-mt-24 space-y-6">
-        <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-          <span className="text-blue-500">#</span> Getting Started
+        <h2 className="text-2xl font-bold text-white flex items-center gap-2 border-b border-gray-900 pb-2">
+          <span className="text-stacks-orange">01.</span> Getting Started
         </h2>
-        <p className="text-gray-400 leading-relaxed">
-          Create Stacks App allows you to scaffold a new project in seconds. The
-          CLI tool handles project structure, dependencies, and now
-          **automatically checks and installs Clarinet** if missing.
+        <p className="text-gray-400 font-light leading-relaxed max-w-3xl">
+          Create Stacks App provides the fastest pipeline for scaffolding
+          full-stack Stacks apps. Run the scaffolding command to setup Next.js,
+          React or Vue, alongside Clarity contracts. Clarinet is automatically
+          detected and installed if missing.
         </p>
 
-        <div className="bg-[#0c0c0c] border border-gray-800 rounded-xl p-6 font-mono text-sm relative group overflow-hidden">
-          <div className="flex items-center gap-2 text-gray-300">
-            <span className="text-green-400">$</span>
-            npx @devvmichael/create-stacks-app my-dapp
-          </div>
-          <div className="mt-4 text-gray-500">
+        <div className="bg-[#0c0c0c] border border-gray-800 rounded-xl font-mono text-sm relative overflow-hidden flex flex-col w-full max-w-3xl shadow-lg">
+          <div className="flex items-center justify-between p-4 border-b border-gray-800/80 bg-gray-900/30">
             <div className="flex gap-2">
-              <span className="text-blue-400">?</span>
-              <span>Select smart contracts:</span>
+              <span className="w-3 h-3 rounded-full bg-red-500/80"></span>
+              <span className="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+              <span className="w-3 h-3 rounded-full bg-green-500/80"></span>
             </div>
-            <div className="pl-4 text-gray-400">
-              ◉ Counter (Simple state management)
-              <br />
-              ◯ SIP-010 Token
-              <br />◯ SIP-009 NFT
+            <CopyButton
+              text="npx @devvmichael/create-stacks-app my-dapp"
+              className="text-gray-400 bg-black/20"
+            />
+          </div>
+          <div className="p-6">
+            <div className="flex items-center gap-3 text-gray-300">
+              <span className="text-green-500">➜</span>
+              <span className="text-white">~</span>
+              npx @devvmichael/create-stacks-app my-dapp
             </div>
           </div>
         </div>
       </section>
 
       <section id="structure" className="scroll-mt-24 space-y-6">
-        <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-          <span className="text-blue-500">#</span> Project Structure
+        <h2 className="text-2xl font-bold text-white flex items-center gap-2 border-b border-gray-900 pb-2">
+          <span className="text-stacks-orange">02.</span> Architecture Structure
         </h2>
-        <p className="text-gray-400">
-          Your generated project follows a strict monorepo structure designed
-          for scalability:
+        <p className="text-gray-400 font-light max-w-3xl">
+          Projects are structured effectively to decouple frontend frameworks
+          off the smart contracts, linked together via Clarinet orchestration.
         </p>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="border border-gray-800 rounded-xl p-6 bg-[#0c0c0c] hover:border-blue-500/30 transition-colors">
-            <h3 className="font-bold text-white mb-2 font-mono">contracts/</h3>
-            <p className="text-sm text-gray-400">
-              Contains all Clarity smart contracts. Each template (Counter,
-              Token, NFT) generates its own folder here.
-            </p>
-          </div>
-          <div className="border border-gray-800 rounded-xl p-6 bg-[#0c0c0c] hover:border-blue-500/30 transition-colors">
-            <h3 className="font-bold text-white mb-2 font-mono">frontend/</h3>
-            <p className="text-sm text-gray-400">
-              The application logic (Next.js/React/Vue). Contains separate
-              pages, components, and Stacks hooks.
-            </p>
-          </div>
-          <div className="border border-gray-800 rounded-xl p-6 bg-[#0c0c0c] hover:border-blue-500/30 transition-colors">
-            <h3 className="font-bold text-white mb-2 font-mono">tests/</h3>
-            <p className="text-sm text-gray-400">
-              Vitest + Clarinet SDK tests for your smart contracts. Run with{" "}
-              <code className="bg-gray-800 px-1 py-0.5 rounded text-xs">
-                npm test
-              </code>
-              .
-            </p>
-          </div>
-          <div className="border border-gray-800 rounded-xl p-6 bg-[#0c0c0c] hover:border-blue-500/30 transition-colors">
-            <h3 className="font-bold text-white mb-2 font-mono">
-              Clarinet.toml
-            </h3>
-            <p className="text-sm text-gray-400">
-              Configuration for the Stacks blockchain environment, networks, and
-              contract dependencies.
-            </p>
-          </div>
+        <div className="grid md:grid-cols-2 gap-4 max-w-4xl">
+          {[
+            {
+              tag: "contracts/",
+              desc: "Contains Clarity smart contracts (Counter, Token, NFT).",
+            },
+            {
+              tag: "frontend/",
+              desc: "Next.js, React, or Vue applications and Stacks connect hooks.",
+            },
+            { tag: "tests/", desc: "Vitest + Clarinet SDK typescript tests." },
+            {
+              tag: "Clarinet.toml",
+              desc: "Network definitions and deployment environment vars.",
+            },
+          ].map((item, idx) => (
+            <div
+              key={idx}
+              className="border border-gray-900 rounded-xl p-5 bg-black/20 hover:border-gray-700 hover:bg-[#0c0c0c] transition-colors"
+            >
+              <h3 className="font-semibold text-white mb-1 font-mono text-sm inline-block px-2 py-1 bg-white/5 rounded">
+                {item.tag}
+              </h3>
+              <p className="text-sm text-gray-500 mt-3 font-light leading-relaxed">
+                {item.desc}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
       <section id="hooks" className="scroll-mt-24 space-y-8">
         <div>
-          <h2 className="text-2xl font-bold text-white flex items-center gap-2 mb-4">
-            <span className="text-blue-500">#</span> Stacks Hooks (v8 API)
+          <h2 className="text-2xl font-bold text-white flex items-center gap-2 border-b border-gray-900 pb-2 mb-4">
+            <span className="text-stacks-orange">03.</span> Connect v8 Hooks
           </h2>
-          <p className="text-gray-400 mb-6">
-            We use the latest <strong>Stacks Connect v8</strong> API. No more
-            legacy providers or complex session management.
+          <p className="text-gray-400 font-light max-w-3xl mb-6">
+            Out of the box support for <strong>Stacks Connect v8</strong> APIs,
+            stripping away older legacy window providers.
           </p>
         </div>
 
-        <div className="space-y-6">
-          <div className="bg-[#0c0c0c] border border-gray-800 rounded-xl overflow-hidden">
-            <div className="px-4 py-2 border-b border-gray-800 bg-gray-900/30 flex justify-between items-center">
+        <div className="space-y-6 max-w-4xl">
+          <div className="bg-[#0c0c0c] border border-gray-800 rounded-xl overflow-hidden shadow-lg group">
+            <div className="px-4 py-3 border-b border-gray-800 bg-gray-900/40 flex justify-between items-center transition-colors">
               <span className="text-sm font-mono text-gray-400">
-                use-stacks.ts
-              </span>
-              <span className="text-xs text-green-400 bg-green-500/10 px-2 py-0.5 rounded">
                 Authentication
               </span>
+              <CopyButton
+                text={`import { showConnect } from "@stacks/connect";\n\nawait showConnect({\n  appDetails: { name: 'My App', icon: '...' }\n});`}
+              />
             </div>
-            <div className="p-4 overflow-x-auto">
+            <div className="p-5 overflow-x-auto bg-black/40">
               <pre className="text-sm font-mono text-gray-300 leading-relaxed">
-                {`// Simplified authentication with Stacks Connect v8
-export function useStacks() {
-  const [address, setAddress] = useState<string | null>(null);
+                {`import { showConnect } from "@stacks/connect";
 
-  const connect = async () => {
-    // Direct call - no window.open needed
-    const response = await showConnect({
-      appDetails: { name: 'My App', icon: '...' }
-    });
-    setAddress(response.addresses[0].address);
-  };
-
-  return { address, connect, disconnect: disconnectWallet };
-}`}
-              </pre>
-            </div>
-          </div>
-
-          <div className="bg-[#0c0c0c] border border-gray-800 rounded-xl overflow-hidden">
-            <div className="px-4 py-2 border-b border-gray-800 bg-gray-900/30 flex justify-between items-center">
-              <span className="text-sm font-mono text-gray-400">
-                use-contract-call.ts
-              </span>
-              <span className="text-xs text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded">
-                Transactions
-              </span>
-            </div>
-            <div className="p-4 overflow-x-auto">
-              <pre className="text-sm font-mono text-gray-300 leading-relaxed">
-                {`// Type-safe contract calls using 'request' API
-export function useContractCall() {
-  const call = async (functionName: string, args: any[]) => {
-    await request('stx_callContract', {
-      contract: 'ST1....counter',
-      functionName,
-      functionArgs: args,
-      postConditions: []
-    });
-  };
-
-  return { call };
+export async function connectWallet() {
+  await showConnect({
+    appDetails: { name: 'My App', icon: '...' }
+  });
 }`}
               </pre>
             </div>
@@ -160,24 +123,15 @@ export function useContractCall() {
 
       <section id="features" className="scroll-mt-24 space-y-6">
         <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-          <span className="text-blue-500">#</span> Features
+          <span className="text-stacks-orange">04.</span> Ready?
         </h2>
-        <p className="text-gray-400">
-          Explore the full capabilities of Create Stacks App.
-        </p>
 
         <div className="flex gap-4">
           <a
-            href="/#features"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-lg text-sm font-bold hover:bg-blue-600 transition-colors"
-          >
-            View All Features
-          </a>
-          <a
             href="/#templates"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-transparent border border-gray-700 text-gray-300 hover:border-gray-500 hover:text-white rounded-lg text-sm font-bold transition-colors"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-white text-black rounded-lg text-sm font-medium hover:opacity-90 transition-opacity shadow-lg shadow-white/10"
           >
-            Browse Templates
+            Browse Scaffolds
           </a>
         </div>
       </section>

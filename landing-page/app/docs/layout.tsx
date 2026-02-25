@@ -18,8 +18,10 @@ export default function DocsLayout({
     <div className="min-h-screen bg-black text-white">
       <nav className="fixed top-0 left-0 right-0 h-16 border-b border-white/5 bg-black/50 backdrop-blur-md z-50 flex items-center justify-between px-6">
         <Link href="/" className="font-bold text-lg flex items-center gap-2">
-          <Logo />
-          Create Stacks App
+          <Logo className="w-6 h-6 text-stacks-orange" />
+          <span className="tracking-tight text-white">
+            Create <span className="text-gray-400">Stacks</span> App
+          </span>
         </Link>
         <div className="flex items-center gap-4">
           <Link
@@ -43,7 +45,7 @@ export default function DocsLayout({
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="text-sm text-gray-400 hover:text-stacks-purple transition-colors block"
+                  className="text-sm text-gray-400 hover:text-white transition-colors block"
                 >
                   {item.label}
                 </a>
