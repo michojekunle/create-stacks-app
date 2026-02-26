@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Logo = ({ className = "w-6 h-6", color = "#3B82F6" }) => (
+export const Logo = ({ className = "w-6 h-6", color = "#FF5500" }) => (
   <svg
     className={className}
     viewBox="0 0 24 24"
@@ -8,28 +8,19 @@ export const Logo = ({ className = "w-6 h-6", color = "#3B82F6" }) => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      d="M12 2L2 7L12 12L22 7L12 2Z"
-      fill={color}
+      d="M12 2L2 7L12 12M12 22L2 17L12 12M12 2Z"
       stroke={color}
-      strokeWidth="1.5"
+      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
     <path
-      d="M2 17L12 22L22 17"
-      stroke="currentColor"
-      strokeWidth="1.5"
+      d="M22 7L12 12L22 17"
+      stroke={color}
+      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="text-white"
-    />
-    <path
-      d="M2 12L12 17L22 12"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="text-gray-400"
+      className="opacity-60"
     />
   </svg>
 );

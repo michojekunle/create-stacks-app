@@ -61,10 +61,10 @@ export function Templates() {
           {templates.map((template, i) => (
             <div
               key={i}
-              className="group p-6 rounded-xl border border-gray-900 hover:border-blue-500/30 transition-colors"
+              className="group p-6 rounded-xl border border-gray-900 hover:border-gray-600 transition-colors"
             >
-              <div className="p-2 rounded-lg bg-blue-500/10 w-fit mb-4 group-hover:bg-blue-500/20 transition-colors">
-                <template.icon className="w-5 h-5 text-blue-400" />
+              <div className="p-2 rounded-lg bg-white/5 w-fit mb-4 group-hover:bg-white/10 transition-colors">
+                <template.icon className="w-5 h-5 text-white" />
               </div>
 
               <h3 className="text-lg font-semibold mb-2">{template.title}</h3>
