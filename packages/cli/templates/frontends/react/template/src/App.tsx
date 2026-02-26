@@ -1,14 +1,11 @@
-import { useState, useEffect, useCallback } from 'react';
-import { AppConfig, UserSession, showConnect } from '@stacks/connect';
-import { StacksTestnet, StacksMainnet } from '@stacks/network';
-import { Header } from './components/Header';
-import { CounterInteraction } from './components/CounterInteraction';
-
-const appConfig = new AppConfig(['store_write', 'publish_data']);
-const userSession = new UserSession({ appConfig });
+import { useState, useEffect, useCallback } from "react";
+import { connect, disconnect, getLocalStorage } from "@stacks/connect";
+import { StacksTestnet, StacksMainnet } from "@stacks/network";
+import { Header } from "./components/Header";
+import { CounterInteraction } from "./components/CounterInteraction";
 
 const network =
-  import.meta.env.VITE_NETWORK === 'mainnet'
+  import.meta.env.VITE_NETWORK === "mainnet"
     ? new StacksMainnet()
     : new StacksTestnet();
 
@@ -16,29 +13,34 @@ function App() {
   const [address, setAddress] = useState<string | null>(null);
 
   useEffect(() => {
-    if (userSession.isUserSignedIn()) {
-      const userData = userSession.loadUserData();
-      const networkKey = import.meta.env.VITE_NETWORK === 'mainnet' ? 'mainnet' : 'testnet';
-      setAddress(userData.profile.stxAddress[networkKey]);
+    // Check local storage for existing session
+    const storage = getLocalStorage();
+    const networkKey =
+      import.meta.env.VITE_NETWORK === "mainnet" ? "mainnet" : "testnet";
+    if (storage?.addresses?.[networkKey]) {
+      setAddress(storage.addresses[networkKey]);
     }
   }, []);
 
-  const handleConnect = useCallback(() => {
-    showConnect({
-      appDetails: {
-        name: 'Stacks App',
-        icon: window.location.origin + '/logo.svg',
-      },
-      redirectTo: '/',
-      onFinish: () => {
+  const handleConnect = useCallback(async () => {
+    try {
+      const response = await connect();
+      // Access the first address from the response
+      const userAddress = response.addresses?.[0]?.address;
+      if (userAddress) {
+        setAddress(userAddress);
+        // Optional: reload if needed to reset state, or handle reactively
         window.location.reload();
-      },
-      userSession,
-    });
+      }
+    } catch (error) {
+      console.error("Failed to connect:", error);
+    }
   }, []);
 
   const handleDisconnect = useCallback(() => {
-    userSession.signUserOut('/');
+    disconnect();
+    setAddress(null);
+    window.location.reload();
   }, []);
 
   return (
@@ -51,7 +53,9 @@ function App() {
 
       <main className="flex-1 container mx-auto px-4 py-8">
         <div className="mb-8 text-center">
-          <h1 className="mb-4 text-4xl font-bold">Welcome to Your Stacks App</h1>
+          <h1 className="mb-4 text-4xl font-bold">
+            Welcome to Your Stacks App
+          </h1>
           <p className="text-lg text-gray-400">
             A full-stack Stacks blockchain application
           </p>
@@ -71,19 +75,24 @@ function App() {
             <div className="card">
               <h3 className="font-semibold mb-2">📝 Edit Contracts</h3>
               <p className="text-sm text-gray-400">
-                Modify contracts in <code className="bg-gray-800 px-1 rounded">contracts/</code>
+                Modify contracts in{" "}
+                <code className="bg-gray-800 px-1 rounded">contracts/</code>
               </p>
             </div>
             <div className="card">
               <h3 className="font-semibold mb-2">🧪 Run Tests</h3>
               <p className="text-sm text-gray-400">
-                Run <code className="bg-gray-800 px-1 rounded">npm run test</code>
+                Run{" "}
+                <code className="bg-gray-800 px-1 rounded">npm run test</code>
               </p>
             </div>
             <div className="card">
               <h3 className="font-semibold mb-2">🚀 Deploy</h3>
               <p className="text-sm text-gray-400">
-                Run <code className="bg-gray-800 px-1 rounded">npm run deploy:testnet</code>
+                Run{" "}
+                <code className="bg-gray-800 px-1 rounded">
+                  npm run deploy:testnet
+                </code>
               </p>
             </div>
           </div>

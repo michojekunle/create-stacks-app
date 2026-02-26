@@ -24,6 +24,10 @@ npm run dev
 - 🧪 **Testing setup included** - Clarinet SDK tests for contracts
 - 📦 **Deployment scripts** - One-command deploy to testnet/mainnet
 
+### 🗺 Roadmap
+
+Looking to see where the project is heading? Check out our [3-6 Month Roadmap](ROADMAP.md) to see planned features like sBTC support, turborepo integration, and AI smart contract boilerplate gen!
+
 ## Installation
 
 ```bash
@@ -51,13 +55,13 @@ npx @devvmichael/create-stacks-app
 npx @devvmichael/create-stacks-app my-dapp [options]
 
 Options:
-  -t, --template <name>      Frontend template: nextjs, react, vue (default: nextjs)
+  -t, --template <name>      Frontend template: nextjs, react, vue
   -c, --contracts <list>     Contracts to include: counter,token,nft
   --typescript               Use TypeScript (default: true)
   --no-typescript            Use JavaScript
   --tailwind                 Include Tailwind CSS (default: true)
   --no-git                   Skip Git initialization
-  --package-manager <pm>     Package manager: npm, pnpm, yarn (default: pnpm)
+  --package-manager <pm>     Package manager: npm, pnpm, yarn
   --skip-install             Skip dependency installation
   -y, --yes                  Skip prompts, use defaults
 ```
@@ -207,4 +211,4 @@ node packages/cli/dist/index.js my-test-project
 
 ## License
 
-MIT © [Michael Ojekunle]
+MIT © [A M D](https://x.com/devvmichael)

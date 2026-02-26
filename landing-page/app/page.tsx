@@ -3,6 +3,7 @@ import { Features } from "@/components/features";
 import { Templates } from "@/components/templates";
 import { CTA } from "@/components/cta";
 import { Footer } from "@/components/footer";
+import { Logo } from "@/components/logo";
 
 import type { Metadata } from "next";
 
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
     title: "Create Stacks App | Build Stacks Apps Faster",
     description:
       "The fastest way to build full-stack applications on Stacks blockchain. Get started with Next.js, React, or Vue and Clarinet-tested smart contracts in seconds.",
-    url: "https://create-stacks-app.com",
+    url: "https://create-stacksapp.vercel.app",
     siteName: "Create Stacks App",
     images: [
       {
@@ -70,7 +71,7 @@ export default function Home() {
       <nav className="fixed top-0 left-0 right-0 z-50 border-b border-gray-900 bg-black/80 backdrop-blur-sm">
         <div className="container mx-auto px-4 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded bg-blue-500" />
+            <Logo />
             <span className="font-medium">Create Stacks App</span>
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm text-gray-500">

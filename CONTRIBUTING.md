@@ -13,17 +13,20 @@ Thank you for your interest in contributing! This guide will help you get starte
 ### Getting Started
 
 1. Fork and clone the repository:
+
    ```bash
-   git clone https://github.com/YOUR_USERNAME/create-stacks-app.git
+   git clone https://github.com/michojekunle/create-stacks-app.git
    cd create-stacks-app
    ```
 
 2. Install dependencies:
+
    ```bash
    pnpm install
    ```
 
 3. Build the project:
+
    ```bash
    pnpm build
    ```
@@ -58,6 +61,7 @@ create-stacks-app/
 ### Adding a New Contract Template
 
 1. Create a new directory in `packages/cli/templates/contracts/`:
+
    ```
    packages/cli/templates/contracts/your-contract/
    ├── your-contract.clar
@@ -71,6 +75,7 @@ create-stacks-app/
 ### Adding a New Frontend Template
 
 1. Create a new directory in `packages/cli/templates/frontends/`:
+
    ```
    packages/cli/templates/frontends/your-framework/
    └── template/
@@ -122,16 +127,19 @@ rm -rf test-project
 ### Pull Request Process
 
 1. Create a feature branch:
+
    ```bash
    git checkout -b feature/my-feature
    ```
 
 2. Make your changes and commit:
+
    ```bash
    git commit -m "feat: add new feature"
    ```
 
 3. Push to your fork:
+
    ```bash
    git push origin feature/my-feature
    ```

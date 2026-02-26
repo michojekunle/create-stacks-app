@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback } from 'react';
-import { openContractCall } from '@stacks/connect';
-import { callReadOnlyFunction, cvToValue } from '@stacks/transactions';
-import type { StacksNetwork } from '@stacks/network';
+import { useState, useEffect, useCallback } from "react";
+import { request } from "@stacks/connect";
+import { callReadOnlyFunction, cvToValue } from "@stacks/transactions";
+import type { StacksNetwork } from "@stacks/network";
 
 interface CounterInteractionProps {
   network: StacksNetwork;
@@ -9,10 +9,16 @@ interface CounterInteractionProps {
   senderAddress: string | null;
 }
 
-const contractAddress = import.meta.env.VITE_CONTRACT_ADDRESS || 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM';
-const contractName = 'counter';
+const contractAddress =
+  import.meta.env.VITE_CONTRACT_ADDRESS ||
+  "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM";
+const contractName = "counter";
 
-export function CounterInteraction({ network, isConnected, senderAddress }: CounterInteractionProps) {
+export function CounterInteraction({
+  network,
+  isConnected,
+  senderAddress,
+}: CounterInteractionProps) {
   const [counter, setCounter] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isIncrementing, setIsIncrementing] = useState(false);
@@ -23,15 +29,15 @@ export function CounterInteraction({ network, isConnected, senderAddress }: Coun
       const result = await callReadOnlyFunction({
         contractAddress,
         contractName,
-        functionName: 'get-counter',
+        functionName: "get-counter",
         functionArgs: [],
         network,
         senderAddress: contractAddress,
       });
       const value = cvToValue(result);
-      setCounter(value?.value ?? 0);
+      setCounter(value?.value ? Number(value.value) : 0);
     } catch (error) {
-      console.error('Failed to fetch counter:', error);
+      console.error("Failed to fetch counter:", error);
     } finally {
       setIsLoading(false);
     }
@@ -45,18 +51,16 @@ export function CounterInteraction({ network, isConnected, senderAddress }: Coun
     if (!senderAddress) return;
     setIsIncrementing(true);
     try {
-      await openContractCall({
-        contractAddress,
-        contractName,
-        functionName: 'increment',
+      await request("stx_callContract", {
+        contract: `${contractAddress}.${contractName}`,
+        functionName: "increment",
         functionArgs: [],
-        network,
-        onFinish: () => {
-          setTimeout(fetchCounter, 2000);
-        },
+        postConditions: [],
       });
+
+      setTimeout(fetchCounter, 2000);
     } catch (error) {
-      console.error('Increment failed:', error);
+      console.error("Increment failed:", error);
     } finally {
       setIsIncrementing(false);
     }
@@ -66,18 +70,16 @@ export function CounterInteraction({ network, isConnected, senderAddress }: Coun
     if (!senderAddress) return;
     setIsDecrementing(true);
     try {
-      await openContractCall({
-        contractAddress,
-        contractName,
-        functionName: 'decrement',
+      await request("stx_callContract", {
+        contract: `${contractAddress}.${contractName}`,
+        functionName: "decrement",
         functionArgs: [],
-        network,
-        onFinish: () => {
-          setTimeout(fetchCounter, 2000);
-        },
+        postConditions: [],
       });
+
+      setTimeout(fetchCounter, 2000);
     } catch (error) {
-      console.error('Decrement failed:', error);
+      console.error("Decrement failed:", error);
     } finally {
       setIsDecrementing(false);
     }
@@ -88,8 +90,8 @@ export function CounterInteraction({ network, isConnected, senderAddress }: Coun
       <h2 className="text-2xl font-bold mb-4">Counter Contract</h2>
 
       <div className="mb-6 text-center">
-        <div className="text-6xl font-bold text-stacks-purple">
-          {isLoading ? '...' : counter}
+        <div className="text-6xl font-bold text-gray-100">
+          {isLoading ? "..." : counter}
         </div>
         <p className="text-sm text-gray-500 mt-2">Current count</p>
       </div>
@@ -101,14 +103,14 @@ export function CounterInteraction({ network, isConnected, senderAddress }: Coun
             disabled={isDecrementing || counter === 0}
             className="btn-secondary flex-1 disabled:opacity-50"
           >
-            {isDecrementing ? 'Processing...' : '− Decrement'}
+            {isDecrementing ? "Processing..." : "− Decrement"}
           </button>
           <button
             onClick={handleIncrement}
             disabled={isIncrementing}
             className="btn-primary flex-1 disabled:opacity-50"
           >
-            {isIncrementing ? 'Processing...' : '+ Increment'}
+            {isIncrementing ? "Processing..." : "+ Increment"}
           </button>
         </div>
       ) : (
