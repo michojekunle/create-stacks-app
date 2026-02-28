@@ -1,49 +1,56 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
-  getConnectedAddress,
-  checkIsConnected,
   connectWallet,
   disconnectWallet,
+  checkIsConnected,
+  getConnectedAddress,
 } from "@/lib/stacks";
 
 export function useStacks() {
+  const [isConnected, setIsConnected] = useState(false);
   const [address, setAddress] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Check connection status on mount
+  // Check connection on mount
   useEffect(() => {
-    const connectedAddress = getConnectedAddress();
-    setAddress(connectedAddress);
-    setIsLoading(false);
-  }, []);
-
-  // Connect handler
-  const connect = useCallback(async () => {
-    setIsLoading(true);
-    const connectedAddress = await connectWallet();
-    setAddress(connectedAddress);
-    setIsLoading(false);
-
-    // Reload to sync state
-    if (connectedAddress) {
-      window.location.reload();
+    const connected = checkIsConnected();
+    setIsConnected(connected);
+    if (connected) {
+      setAddress(getConnectedAddress());
     }
   }, []);
 
-  // Disconnect handler
-  const disconnect = useCallback(() => {
+  const handleConnect = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const result = await connectWallet();
+      // v8 connect() returns { addresses: AddressEntry[] }
+      const stxAddress =
+        result.addresses?.find((a) => a.symbol === "STX")?.address ||
+        result.addresses?.[0]?.address ||
+        null;
+      setAddress(stxAddress);
+      setIsConnected(true);
+    } catch (error) {
+      console.error("Failed to connect wallet:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  const handleDisconnect = useCallback(() => {
     disconnectWallet();
     setAddress(null);
-    window.location.reload();
+    setIsConnected(false);
   }, []);
 
   return {
+    isConnected,
     address,
     isLoading,
-    isConnected: !!address && checkIsConnected(),
-    connect,
-    disconnect,
+    connect: handleConnect,
+    disconnect: handleDisconnect,
   };
 }

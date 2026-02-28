@@ -35,10 +35,11 @@
     (listing (unwrap! (map-get? listings listing-id) ERR-LISTING-NOT-FOUND))
     (price (get price listing))
     (seller (get seller listing))
+    (buyer tx-sender)
   )
     ;; Transfer STX to seller
-    (try! (stx-transfer? price tx-sender seller))
+    (try! (stx-transfer? price buyer seller))
     ;; Transfer NFT to buyer
-    (as-contract (try! (contract-call? nft-asset-contract transfer token-id tx-sender tx-sender)))
+    (as-contract (try! (contract-call? nft-asset-contract transfer token-id tx-sender buyer)))
     (map-delete listings listing-id)
     (ok true)))

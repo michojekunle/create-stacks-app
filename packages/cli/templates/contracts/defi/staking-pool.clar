@@ -10,10 +10,10 @@
     (ok true)))
 
 (define-public (unstake (token <sip010-trait>) (amount uint))
-  (begin
-    (asserts! (>= (default-to u0 (map-get? stakes tx-sender)) amount) (err u100))
-    (try! (as-contract (contract-call? token transfer amount tx-sender tx-sender none)))
-    (map-set stakes tx-sender (- (default-to u0 (map-get? stakes tx-sender)) amount))
+  (let ((recipient tx-sender))
+    (asserts! (>= (default-to u0 (map-get? stakes recipient)) amount) (err u100))
+    (try! (as-contract (contract-call? token transfer amount tx-sender recipient none)))
+    (map-set stakes recipient (- (default-to u0 (map-get? stakes recipient)) amount))
     (ok true)))
 
 (define-read-only (get-stake (staker principal))

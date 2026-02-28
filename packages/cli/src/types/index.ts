@@ -1,4 +1,4 @@
-export type PackageManager = 'npm' | 'pnpm' | 'yarn';
+export type PackageManager = "npm" | "pnpm" | "yarn";
 
 export interface CreateOptions {
   template?: string;
@@ -14,7 +14,7 @@ export interface CreateOptions {
 export interface ProjectConfig {
   projectName: string;
   projectPath: string;
-  template: 'nextjs' | 'react' | 'vue';
+  template: "nextjs" | "react";
   typescript: boolean;
   contracts: string[];
   tailwind: boolean;

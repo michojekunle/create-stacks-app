@@ -38,7 +38,6 @@ export async function runPrompts(
       choices: [
         { name: "Next.js (Recommended)", value: "nextjs" },
         { name: "React", value: "react" },
-        { name: "Vue", value: "vue" },
       ],
       default: "nextjs",
       when: !options?.template,
@@ -56,7 +55,7 @@ export async function runPrompts(
       message: "Select smart contracts to include:",
       choices: [
         {
-          name: "Counter (Simple state management example)",
+          name: "Counter (Simple state management)",
           value: "counter",
           checked: true,
         },
@@ -68,6 +67,16 @@ export async function runPrompts(
         {
           name: "NFT (SIP-009 non-fungible token)",
           value: "nft",
+          checked: false,
+        },
+        {
+          name: "Staking Pool (DeFi example)",
+          value: "staking-pool",
+          checked: false,
+        },
+        {
+          name: "NFT Marketplace (Trading example)",
+          value: "marketplace",
           checked: false,
         },
       ],
@@ -128,7 +137,7 @@ export async function getDefaultConfig(
   return {
     projectName,
     projectPath: path.resolve(process.cwd(), projectName),
-    template: (options?.template as "nextjs" | "react" | "vue") || "nextjs",
+    template: (options?.template as "nextjs" | "react") || "nextjs",
     typescript: options?.typescript ?? true,
     contracts: options?.contracts?.split(",") || ["counter"],
     tailwind: options?.tailwind ?? true,

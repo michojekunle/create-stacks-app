@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useEffect, useState, useCallback } from 'react';
-import { callReadOnlyFunction, cvToValue } from '@stacks/transactions';
-import type { ContractConfig } from '@/lib/contracts';
+import { useEffect, useState, useCallback } from "react";
+import { callReadOnly } from "@/lib/stacks";
+import type { ContractConfig } from "@/lib/contracts";
 
 export function useContractRead(
   contract: ContractConfig,
   functionName: string,
-  functionArgs: any[] = []
+  functionArgs: string[] = [],
 ) {
   const [data, setData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -18,23 +18,28 @@ export function useContractRead(
     setError(null);
 
     try {
-      const result = await callReadOnlyFunction({
+      const result = await callReadOnly({
         contractAddress: contract.address,
         contractName: contract.name,
         functionName,
         functionArgs,
-        network: contract.network,
         senderAddress: contract.address,
       });
 
-      setData(cvToValue(result));
+      // The Hiro API returns { okay: true, result: "0x..." } for read-only calls
+      setData(result);
     } catch (err) {
       setError(err as Error);
-      console.error('Contract read error:', err);
+      console.error("Contract read error:", err);
     } finally {
       setIsLoading(false);
     }
-  }, [contract.address, contract.name, contract.network, functionName, functionArgs]);
+  }, [
+    contract.address,
+    contract.name,
+    functionName,
+    JSON.stringify(functionArgs),
+  ]);
 
   useEffect(() => {
     fetchData();

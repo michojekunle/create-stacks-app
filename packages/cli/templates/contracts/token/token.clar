@@ -1,7 +1,7 @@
 ;; SIP-010 Fungible Token
 ;; A standard fungible token implementation
 
-(impl-trait 'SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard.sip-010-trait)
+(impl-trait .sip010-trait.sip010-trait)
 
 ;; Token configuration
 (define-constant CONTRACT-OWNER tx-sender)
@@ -16,7 +16,7 @@
 (define-constant ERR-INSUFFICIENT-BALANCE (err u102))
 
 ;; Storage
-(define-fungible-token my-token TOKEN-SUPPLY)
+(define-fungible-token my-token)
 (define-data-var token-uri (optional (string-utf8 256)) none)
 
 ;; Initialize token supply to contract owner

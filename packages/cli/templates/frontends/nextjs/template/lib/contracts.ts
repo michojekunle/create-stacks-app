@@ -1,10 +1,9 @@
-import { network } from "./stacks";
-import type { StacksNetwork } from "@stacks/network";
+import { networkName } from "./stacks";
 
 export interface ContractConfig {
   address: string;
   name: string;
-  network: StacksNetwork;
+  network: string;
 }
 
 // Contract address from environment or default devnet address
@@ -15,17 +14,17 @@ const contractAddress =
 export const counterContract: ContractConfig = {
   address: contractAddress,
   name: "counter",
-  network,
+  network: networkName,
 };
 
 export const tokenContract: ContractConfig = {
   address: contractAddress,
   name: "token",
-  network,
+  network: networkName,
 };
 
 export const nftContract: ContractConfig = {
   address: contractAddress,
   name: "nft",
-  network,
+  network: networkName,
 };

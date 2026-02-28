@@ -1,6 +1,6 @@
 {
   "name": "@devvmichael/create-stacks-app-monorepo",
-  "version": "0.2.4",
+  "version": "0.2.42",
   "private": false,
   "description": "Scaffold full-stack Stacks blockchain applications",
   "scripts": {
@@ -8,11 +8,15 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "test": "turbo run test",
+    "test:contracts": "pnpm --filter @devvmichael/create-stacks-app test:contracts",
     "clean": "turbo run clean && rm -rf node_modules"
   },
   "devDependencies": {
+    "@stacks/clarinet-sdk": "^3.14.0",
+    "@stacks/transactions": "^7.3.1",
     "turbo": "^2.0.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vitest-environment-clarinet": "^3.0.2"
   },
   "packageManager": "pnpm@8.15.0",
   "engines": {

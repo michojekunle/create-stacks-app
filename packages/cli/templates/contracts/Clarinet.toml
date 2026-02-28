@@ -1,0 +1,58 @@
+[project]
+name = "template-verification"
+authors = []
+description = "Monorepo template verification"
+telemetry = false
+requirements = []
+cache_dir = ".clarinet"
+boot_phi = false
+boot_epsilon = false
+
+[contracts.counter]
+path = "counter/counter.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.nft]
+path = "nft/nft.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.token]
+path = "token/token.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.nft-trait]
+path = "marketplace/nft-trait.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.sip010-trait]
+path = "defi/sip010-trait.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.nft-marketplace]
+path = "marketplace/nft-marketplace.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.staking-pool]
+path = "defi/staking-pool.clar"
+clarity_version = 2
+epoch = 2.5
+
+[repl]
+costs_version = 2
+parser_version = 2
+
+[repl.analysis]
+passes = ["check_checker"]
+
+[repl.analysis.check_checker]
+strict = false
+trusted_principals = []
+check_all_unwrapped = false
+trust_unwrapped_calls = true
+conflicting_principals = []

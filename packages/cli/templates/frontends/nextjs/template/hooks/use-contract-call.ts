@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { request } from "@/lib/stacks";
+import { callContract } from "@/lib/stacks";
 import { useStacks } from "./use-stacks";
 import type { ContractConfig } from "@/lib/contracts";
 
@@ -14,7 +14,7 @@ export function useContractCall(
   const [txId, setTxId] = useState<string | null>(null);
   const { address } = useStacks();
 
-  const call = async (functionArgs: any[] = []) => {
+  const call = async (functionArgs: string[] = []) => {
     if (!address) {
       throw new Error("Wallet not connected");
     }
@@ -23,16 +23,19 @@ export function useContractCall(
     setError(null);
 
     try {
-      // Using Stacks Connect v8 request API
-      const result = await request("stx_callContract", {
-        contract: `${contract.address}.${contract.name}`,
+      // Using @stacks/connect v8 request("stx_callContract", params)
+      const result = await callContract({
+        contractAddress: contract.address,
+        contractName: contract.name,
         functionName,
         functionArgs,
+        network: contract.network,
       });
 
-      if (result?.txId) {
-        setTxId(result.txId);
-        console.log("Transaction submitted:", result.txId);
+      // v8 returns { txid?: string, transaction?: string }
+      if (result?.txid) {
+        setTxId(result.txid);
+        console.log("Transaction submitted:", result.txid);
       }
 
       return result;

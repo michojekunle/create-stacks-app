@@ -1,10 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { request } from "@stacks/connect";
-import { callReadOnlyFunction, cvToValue } from "@stacks/transactions";
-import type { StacksNetwork } from "@stacks/network";
 
 interface CounterInteractionProps {
-  network: StacksNetwork;
+  network: string;
   isConnected: boolean;
   senderAddress: string | null;
 }
@@ -13,6 +11,18 @@ const contractAddress =
   import.meta.env.VITE_CONTRACT_ADDRESS ||
   "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM";
 const contractName = "counter";
+
+// Helper to determine API base URL from network name
+function getApiBase(network: string): string {
+  switch (network) {
+    case "mainnet":
+      return "https://api.mainnet.hiro.so";
+    case "testnet":
+      return "https://api.testnet.hiro.so";
+    default:
+      return "http://localhost:3999";
+  }
+}
 
 export function CounterInteraction({
   network,
@@ -26,18 +36,31 @@ export function CounterInteraction({
 
   const fetchCounter = useCallback(async () => {
     try {
-      const result = await callReadOnlyFunction({
-        contractAddress,
-        contractName,
-        functionName: "get-counter",
-        functionArgs: [],
-        network,
-        senderAddress: contractAddress,
+      const apiBase = getApiBase(network);
+      const url = `${apiBase}/v2/contracts/call-read/${contractAddress}/${contractName}/get-counter`;
+
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sender: contractAddress,
+          arguments: [],
+        }),
       });
-      const value = cvToValue(result);
-      setCounter(value?.value ? Number(value.value) : 0);
+
+      if (!res.ok) throw new Error(`API error: ${res.statusText}`);
+      const data = await res.json();
+
+      if (data.okay && data.result) {
+        const hex = data.result.slice(4);
+        const value = parseInt(hex, 16);
+        setCounter(isNaN(value) ? 0 : value);
+      } else {
+        setCounter(0);
+      }
     } catch (error) {
       console.error("Failed to fetch counter:", error);
+      setCounter(0);
     } finally {
       setIsLoading(false);
     }
@@ -47,77 +70,92 @@ export function CounterInteraction({
     fetchCounter();
   }, [fetchCounter]);
 
-  const handleIncrement = async () => {
+  const handleIncrement = useCallback(async () => {
     if (!senderAddress) return;
     setIsIncrementing(true);
     try {
-      await request("stx_callContract", {
+      const result = await request("stx_callContract", {
         contract: `${contractAddress}.${contractName}`,
         functionName: "increment",
         functionArgs: [],
-        postConditions: [],
+        network,
       });
-
-      setTimeout(fetchCounter, 2000);
+      console.log("Increment tx:", result?.txid);
+      setTimeout(fetchCounter, 3000);
     } catch (error) {
       console.error("Increment failed:", error);
     } finally {
       setIsIncrementing(false);
     }
-  };
+  }, [senderAddress, network, fetchCounter]);
 
-  const handleDecrement = async () => {
+  const handleDecrement = useCallback(async () => {
     if (!senderAddress) return;
     setIsDecrementing(true);
     try {
-      await request("stx_callContract", {
+      const result = await request("stx_callContract", {
         contract: `${contractAddress}.${contractName}`,
         functionName: "decrement",
         functionArgs: [],
-        postConditions: [],
+        network,
       });
-
-      setTimeout(fetchCounter, 2000);
+      console.log("Decrement tx:", result?.txid);
+      setTimeout(fetchCounter, 3000);
     } catch (error) {
       console.error("Decrement failed:", error);
     } finally {
       setIsDecrementing(false);
     }
-  };
+  }, [senderAddress, network, fetchCounter]);
 
   return (
-    <div className="card">
-      <h2 className="text-2xl font-bold mb-4">Counter Contract</h2>
-
-      <div className="mb-6 text-center">
-        <div className="text-6xl font-bold text-gray-100">
-          {isLoading ? "..." : counter}
+    <div className="card card-glow-orange max-w-xl mx-auto">
+      <div className="relative z-10">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-2xl font-bold text-white tracking-tight">
+            Counter Interaction
+          </h2>
+          <div className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] text-gray-400 font-mono uppercase tracking-widest">
+            {contractName}.clar
+          </div>
         </div>
-        <p className="text-sm text-gray-500 mt-2">Current count</p>
+
+        <div className="mb-10 text-center py-8 bg-white/[0.02] border border-white/[0.05] rounded-3xl">
+          <div className="text-8xl font-bold bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent mb-2">
+            {isLoading ? "..." : counter}
+          </div>
+          <p className="text-sm text-gray-500 font-medium">
+            Current counter value
+          </p>
+        </div>
+
+        {isConnected ? (
+          <div className="grid grid-cols-2 gap-4">
+            <button
+              onClick={handleDecrement}
+              disabled={isDecrementing || counter === 0}
+              className="btn-secondary disabled:opacity-30 flex items-center justify-center gap-2"
+            >
+              <span className="text-lg">−</span>
+              {isDecrementing ? "..." : "Decrement"}
+            </button>
+            <button
+              onClick={handleIncrement}
+              disabled={isIncrementing}
+              className="btn-primary flex items-center justify-center gap-2"
+            >
+              <span className="text-lg">+</span>
+              {isIncrementing ? "..." : "Increment"}
+            </button>
+          </div>
+        ) : (
+          <div className="text-center p-4 bg-hiro-orange/5 border border-hiro-orange/10 rounded-2xl">
+            <p className="text-sm text-hiro-orange/80 font-medium">
+              Connect your wallet to interact with this contract
+            </p>
+          </div>
+        )}
       </div>
-
-      {isConnected ? (
-        <div className="flex gap-2">
-          <button
-            onClick={handleDecrement}
-            disabled={isDecrementing || counter === 0}
-            className="btn-secondary flex-1 disabled:opacity-50"
-          >
-            {isDecrementing ? "Processing..." : "− Decrement"}
-          </button>
-          <button
-            onClick={handleIncrement}
-            disabled={isIncrementing}
-            className="btn-primary flex-1 disabled:opacity-50"
-          >
-            {isIncrementing ? "Processing..." : "+ Increment"}
-          </button>
-        </div>
-      ) : (
-        <p className="text-center text-gray-500">
-          Connect your wallet to interact with the contract
-        </p>
-      )}
     </div>
   );
 }

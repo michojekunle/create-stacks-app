@@ -29,7 +29,7 @@ export async function initializeClarinet(config: ProjectConfig): Promise<void> {
     // Run clarinet new in temp directory
     try {
       await execAsync(
-        `cd "${tempDir}" && echo "n" | clarinet new "${projectName}"`,
+        `cd "${tempDir}" && clarinet new "${projectName}" --disable-telemetry`,
       );
     } catch (e) {
       // If clarinet new fails, it might be because of directory structure
@@ -67,6 +67,8 @@ export async function initializeClarinet(config: ProjectConfig): Promise<void> {
   }
 }
 
+import { resolveContractDependencies } from "./contract-resolver.js";
+
 export async function updateClarinetConfig(
   projectPath: string,
   contracts: string[],
@@ -75,8 +77,10 @@ export async function updateClarinetConfig(
 
   let tomlContent = await fs.readFile(clarinetTomlPath, "utf-8");
 
+  const contractsToInstall = resolveContractDependencies(contracts);
+
   // Add contracts based on selection
-  for (const contract of contracts) {
+  for (const contract of contractsToInstall) {
     tomlContent += `
 [contracts.${contract}]
 path = "contracts/${contract}.clar"

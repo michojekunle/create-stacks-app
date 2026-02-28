@@ -4,3 +4,5 @@ node_modules
 .DS_Store
 dist
 .npmrc
+*.env
+*.npm-cache

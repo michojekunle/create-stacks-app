@@ -1,6 +1,6 @@
 {
     "name": "@devvmichael/create-stacks-app",
-    "version": "0.2.4",
+    "version": "0.2.42",
     "description": "Scaffold full-stack Stacks blockchain applications",
     "type": "module",
     "main": "./dist/index.js",
@@ -17,6 +17,7 @@
         "clean": "rm -rf dist",
         "lint": "eslint src",
         "test": "vitest run",
+        "test:contracts": "cd templates/contracts && vitest run --config ../../vitest-contracts.config.ts",
         "prepublishOnly": "npm run build"
     },
     "keywords": [
@@ -41,13 +42,16 @@
     },
     "devDependencies": {
         "@eslint/js": "^9.39.2",
+        "@stacks/clarinet-sdk": "^3.14.0",
+        "@stacks/transactions": "^7.3.1",
         "@types/fs-extra": "^11.0.4",
         "@types/inquirer": "^9.0.7",
         "@types/node": "^20.10.0",
         "eslint": "^9.39.2",
         "typescript": "^5.3.3",
         "typescript-eslint": "^8.53.1",
-        "vitest": "^1.0.4"
+        "vitest": "^1.0.4",
+        "vitest-environment-clarinet": "^3.0.2"
     },
     "engines": {
         "node": ">=18.0.0"
