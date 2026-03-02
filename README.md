@@ -18,7 +18,7 @@ npm run dev
 
 - 🚀 **One-command project setup** - Get started in seconds
 - 📝 **Smart contract templates** - Counter, Token (SIP-010), NFT (SIP-009)
-- ⚛️ **Modern frontend frameworks** - Next.js, React, or Vue
+- ⚛️ **Modern frontend frameworks** - Next.js or React
 - 🔗 **Pre-configured Stacks.js** - Wallet connect, contract calls ready to go
 - 🎨 **Tailwind CSS styling** - Beautiful UI out of the box
 - 🧪 **Testing setup included** - Clarinet SDK tests for contracts
@@ -26,7 +26,21 @@ npm run dev
 
 ### 🗺 Roadmap
 
-Looking to see where the project is heading? Check out our [3-6 Month Roadmap](ROADMAP.md) to see planned features like sBTC support, turborepo integration, and AI smart contract boilerplate gen!
+- [x] **Interactive CLI** - One-command scaffolding with `npx`
+- [x] **Stacks Connect v8** - Modern wallet connection integration
+- [x] **Custom Hooks** - `useStacks`, `useContractRead`, `useContractCall`
+- [x] **Contract Templates** - SIP-010, SIP-009, Marketplace, Staking
+- [x] **Testing Suite** - Vitest + Clarinet SDK pre-configured
+- [x] **CLI Add Command** - Add contracts to existing projects
+- [x] **CLI Deploy Command** - One-command testnet/mainnet deployment
+- [ ] **sBTC Integration** - Native support for Bitcoin-backed assets
+- [ ] **Type Generation** - End-to-end type safety from Clarity code
+- [ ] **Turborepo Scaffold** - High-performance monorepo option
+- [ ] **Shadcn/UI** - Optional UI component library injection
+- [ ] **CI/CD Pipelines** - Auto-generated GitHub Actions
+- [ ] **AI Boilerplate** - Experimental `--ai` flag for contract generation
+
+See the full [3-6 Month Roadmap](ROADMAP.md) for more details.
 
 ## Installation
 
