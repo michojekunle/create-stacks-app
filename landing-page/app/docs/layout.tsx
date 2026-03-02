@@ -1,13 +1,50 @@
 import Link from "next/link";
+import { Logo } from "@/components/logo";
 
 const docsNav = [
-  { href: "#getting-started", label: "Getting Started" },
-  { href: "#navigation", label: "Project Navigation" },
-  { href: "#hooks", label: "Ready-Made Hooks" },
-  { href: "#features", label: "Features Overview" },
+  {
+    title: "Getting Started",
+    items: [
+      { href: "#getting-started", label: "Installation" },
+      { href: "#prerequisites", label: "Prerequisites" },
+      { href: "#quick-start", label: "Quick Start" },
+    ],
+  },
+  {
+    title: "Project Structure",
+    items: [
+      { href: "#structure", label: "Architecture Overview" },
+      { href: "#contracts", label: "Smart Contracts" },
+      { href: "#frontend", label: "Frontend Frameworks" },
+    ],
+  },
+  {
+    title: "Development",
+    items: [
+      { href: "#hooks", label: "Stacks Connect v8 Hooks" },
+      { href: "#contract-calls", label: "Contract Configuration" },
+      { href: "#testing", label: "Testing" },
+    ],
+  },
+  {
+    title: "Deployment",
+    items: [
+      { href: "#deployment", label: "Deploy Contracts" },
+      { href: "#networks", label: "Network Configuration" },
+    ],
+  },
+  {
+    title: "CLI Reference",
+    items: [{ href: "#cli-commands", label: "All Commands" }],
+  },
+  {
+    title: "Templates",
+    items: [
+      { href: "#templates", label: "Available Templates" },
+      { href: "#custom-templates", label: "Contributing" },
+    ],
+  },
 ];
-
-import { Logo } from "@/components/logo";
 
 export default function DocsLayout({
   children,
@@ -16,45 +53,76 @@ export default function DocsLayout({
 }) {
   return (
     <div className="min-h-screen bg-black text-white">
-      <nav className="fixed top-0 left-0 right-0 h-16 border-b border-white/5 bg-black/50 backdrop-blur-md z-50 flex items-center justify-between px-6">
-        <Link href="/" className="font-bold text-lg flex items-center gap-2">
-          <Logo className="w-6 h-6 text-stacks-orange" />
+      {/* Top Nav */}
+      <nav className="fixed top-0 left-0 right-0 h-16 border-b border-white/5 bg-black/90 backdrop-blur-xl z-50 flex items-center justify-between px-6">
+        <Link href="/" className="font-bold text-lg flex items-center gap-2.5">
+          <Logo className="w-7 h-7 text-stacks-orange" />
           <span className="tracking-tight text-white">
-            Create <span className="text-gray-400">Stacks</span> App
+            Create <span className="text-stacks-orange">Stacks</span> App
           </span>
         </Link>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-6">
           <Link
             href="/"
             className="text-sm text-gray-400 hover:text-white transition-colors"
           >
             Home
           </Link>
-          <span className="text-sm text-gray-600">|</span>
-          <span className="text-sm text-white font-medium">Documentation</span>
+          <span className="w-px h-4 bg-white/10" />
+          <span className="text-sm text-white font-semibold flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-stacks-orange" />
+            Documentation
+          </span>
+          <a
+            href="https://github.com/michojekunle/create-stacks-app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+          >
+            GitHub
+          </a>
         </div>
       </nav>
 
       <div className="flex pt-16">
-        <aside className="w-64 fixed top-16 bottom-0 left-0 border-r border-white/10 p-6 hidden md:block overflow-y-auto bg-black/20">
-          <h5 className="font-bold mb-4 text-xs text-gray-500 uppercase tracking-wider">
-            Contents
-          </h5>
-          <ul className="space-y-3">
-            {docsNav.map((item) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  className="text-sm text-gray-400 hover:text-white transition-colors block"
-                >
-                  {item.label}
-                </a>
-              </li>
+        {/* Sidebar */}
+        <aside className="w-72 fixed top-16 bottom-0 left-0 border-r border-white/5 p-6 hidden lg:block overflow-y-auto bg-black">
+          <nav className="space-y-8">
+            {docsNav.map((section) => (
+              <div key={section.title}>
+                <h5 className="font-bold mb-3 text-[10px] text-gray-500 uppercase tracking-[0.2em]">
+                  {section.title}
+                </h5>
+                <ul className="space-y-1">
+                  {section.items.map((item) => (
+                    <li key={item.href}>
+                      <a
+                        href={item.href}
+                        className="text-sm text-gray-400 hover:text-white transition-colors block px-3 py-1.5 rounded-lg hover:bg-white/5 -mx-3"
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </ul>
+          </nav>
+
+          <div className="mt-8 pt-6 border-t border-white/5">
+            <a
+              href="https://twitter.com/devvmichael"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-gray-600 hover:text-gray-400 transition-colors"
+            >
+              Built by @devvmichael
+            </a>
+          </div>
         </aside>
 
-        <main className="flex-1 md:ml-64 px-6 py-12 lg:px-12 lg:py-16 max-w-5xl mx-auto">
+        {/* Main Content */}
+        <main className="flex-1 lg:ml-72 px-6 py-12 lg:px-16 lg:py-16 max-w-4xl">
           {children}
         </main>
       </div>

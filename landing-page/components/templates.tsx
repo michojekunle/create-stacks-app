@@ -15,35 +15,35 @@ const templates = [
     icon: Layers,
     title: "Counter",
     description:
-      "Simple state management example. Perfect for learning the basics of Clarity and Stacks data storage.",
+      "State management with owner-gated reset. Perfect for learning Clarity basics — variables, access control, and error handling.",
     tags: ["Beginner", "State"],
   },
   {
     icon: Coins,
     title: "SIP-010 Token",
     description:
-      "Full fungible token standard implementation with mint, burn, and transfer functionality.",
+      "Full fungible token standard implementation with mint, burn, and transfer following the SIP-010 specification.",
     tags: ["DeFi", "Standard"],
   },
   {
     icon: ImageIcon,
     title: "SIP-009 NFT",
     description:
-      "Non-fungible token standard with metadata, royalties, and marketplace integration hooks.",
+      "Non-fungible token standard with minting, metadata, transfer, and ownership following SIP-009.",
     tags: ["NFT", "Standard"],
   },
   {
     icon: Briefcase,
     title: "NFT Marketplace",
     description:
-      "Complete marketplace architecture with listing, buying, selling, and price discovery.",
+      "Trading marketplace with listing, buying, and selling. Includes NFT trait and a companion SIP-009 contract.",
     tags: ["Advanced", "Full Stack"],
   },
   {
     icon: TrendingUp,
-    title: "DeFi Dashboard",
+    title: "Staking Pool",
     description:
-      "Yield farming dashboard with staking pools, reward calculation, and TVL tracking.",
+      "DeFi staking example with SIP-010 trait dependency. Demonstrates multi-contract architecture and token integration.",
     tags: ["Advanced", "DeFi"],
   },
 ];

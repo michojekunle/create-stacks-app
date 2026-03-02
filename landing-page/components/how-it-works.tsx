@@ -6,24 +6,24 @@ import { Terminal, Code2, Rocket, CheckCircle2 } from "lucide-react";
 const steps = [
   {
     icon: Terminal,
-    title: "1. Run Command",
+    title: "1. Scaffold",
     description:
-      "Initialize your project with a single npx command. Choose your frontend framework and contract template.",
-    code: "npx @devvmichael/create-stacks-app@latest",
+      "Initialize your project with a single npx command. Pick your frontend framework and contract templates interactively.",
+    code: "npx @devvmichael/create-stacks-app my-dapp",
   },
   {
     icon: Code2,
     title: "2. Develop",
     description:
-      "Write your Clarity smart contracts and build your frontend with our pre-configured hooks and components.",
-    code: "npm run dev",
+      "Write Clarity smart contracts and build your frontend with pre-configured hooks, wallet integration, and Tailwind CSS.",
+    code: "cd my-dapp && npm run dev",
   },
   {
     icon: Rocket,
     title: "3. Deploy",
     description:
-      "Test your contracts with Clarinet and deploy with our built-in scripts to testnet or mainnet.",
-    code: "npm run deploy",
+      "Test contracts with Clarinet SDK and deploy to testnet or mainnet using the built-in CLI deploy command.",
+    code: "npx @devvmichael/create-stacks-app deploy testnet",
   },
 ];
 
@@ -79,10 +79,10 @@ export function HowItWorks() {
               <div className="space-y-4">
                 {[
                   "TypeScript first development",
-                  "Modular monorepo structure",
-                  "Automated contract testing with Clarinet",
+                  "Stacks Connect v8 wallet hooks",
+                  "Contract testing with Clarinet SDK + Vitest",
                   "Wallet integration out of the box",
-                  "Optimized build pipeline",
+                  "CLI commands for add & deploy",
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-3">
                     <CheckCircle2 className="w-5 h-5 text-stacks-orange shrink-0" />
@@ -110,17 +110,20 @@ export function HowItWorks() {
                 </div>
                 <div className="flex gap-3">
                   <span className="text-green-500">?</span>
-                  <span>Select a template:</span>
-                  <span className="text-stacks-orange">SIP-010 Token</span>
+                  <span>Select a frontend framework:</span>
+                  <span className="text-stacks-orange">Next.js</span>
                 </div>
                 <div className="flex gap-3">
                   <span className="text-green-500">?</span>
-                  <span>Select a frontend:</span>
-                  <span className="text-stacks-orange">Next.js</span>
+                  <span>Select contracts:</span>
+                  <span className="text-stacks-orange">Counter, Token</span>
                 </div>
-                <div className="mt-4 text-gray-600">
-                  Initialising project...
+                <div className="flex gap-3">
+                  <span className="text-green-500">?</span>
+                  <span>Package manager:</span>
+                  <span className="text-stacks-orange">pnpm</span>
                 </div>
+                <div className="mt-4 text-gray-600">Scaffolding project...</div>
                 <div className="text-green-500">
                   ✔ Done! Your dApp is ready at ./my-dapp
                 </div>

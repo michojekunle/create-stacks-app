@@ -34,20 +34,39 @@
     }
 }
 
-/* Minimal gradient with subtle accent */
-.gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60;
-}
-
-/* Very subtle hero glow with accent tint */
+/* Hero glow */
 .hero-glow {
-    background: radial-gradient(circle at 50% 50%, rgba(255, 107, 0, 0.15) 0%, rgba(85, 70, 255, 0.05) 50%, transparent 100%);
+    background: radial-gradient(ellipse 80% 60% at 50% 40%,
+            rgba(255, 85, 0, 0.08) 0%,
+            rgba(85, 70, 255, 0.04) 40%,
+            transparent 100%);
 }
 
-.stacks-orange-glow {
-    box-shadow: 0 0 50px -12px rgba(255, 107, 0, 0.3);
+/* Gradient text utility */
+.gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-b from-white to-white/50;
 }
 
+/* Selection */
 ::selection {
-    @apply bg-stacks-orange/30 text-white;
+    background: rgba(255, 85, 0, 0.2);
+    color: white;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
 }

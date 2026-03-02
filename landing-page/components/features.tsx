@@ -22,28 +22,28 @@ const features = [
     icon: Code2,
     title: "Modern Stack",
     description:
-      "Built with Next.js 14 (App Router), TypeScript, Tailwind CSS, and the latest Stacks.js libraries.",
+      "Built with Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS v4, and @stacks/connect v8.",
     gradient: "from-green-500/20 to-emerald-500/20",
   },
   {
     icon: Box,
     title: "Monorepo Structure",
     description:
-      "Organized Turborepo structure perfect for scaling. Keep your contracts and frontend in one place.",
+      "Clean separation of contracts and frontend. Develop, test, and deploy each independently.",
     gradient: "from-pink-500/20 to-rose-500/20",
   },
   {
     icon: Smartphone,
     title: "Wallet Connect",
     description:
-      "Pre-configured integration with Leather and Xverse wallets. Simple hooks for authentication and signing.",
+      "Pre-configured Stacks Connect v8 integration with Leather and Xverse. Hooks for auth, reads, and contract calls.",
     gradient: "from-purple-500/20 to-indigo-500/20",
   },
   {
     icon: Globe,
     title: "Multi-Network",
     description:
-      "Seamless deployment scripts for Devnet, Testnet and Mainnet. Switch environments with a single flag.",
+      "CLI deploy command for Testnet and Mainnet. Clarinet Devnet for local development. Switch with env vars.",
     gradient: "from-cyan-500/20 to-blue-500/20",
   },
 ];
