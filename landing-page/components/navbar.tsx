@@ -32,8 +32,12 @@ export function Navbar() {
         }`}
       >
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-2.5 group">
-            <Logo className="w-7 h-7 text-stacks-orange" />
+          <a
+            href="/"
+            className="flex items-center gap-2.5 group"
+            aria-label="Create Stacks App Home"
+          >
+            <Logo className="w-7 h-7 text-stacks-orange" aria-hidden="true" />
             <span className="font-bold tracking-tight text-lg">
               Create <span className="text-stacks-orange">Stacks</span> App
             </span>
@@ -55,6 +59,7 @@ export function Navbar() {
               href="https://github.com/michojekunle/create-stacks-app"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="View Create Stacks App on GitHub"
               className="flex items-center gap-2 px-4 py-2 text-sm bg-white/5 border border-white/10 rounded-full text-white hover:bg-white/10 transition-all"
             >
               <Github className="w-4 h-4" />
@@ -98,6 +103,7 @@ export function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsOpen(false)}
+                aria-label="View Create Stacks App on GitHub"
                 className="flex items-center gap-3 text-lg font-medium text-gray-300 hover:text-white py-3 transition-colors"
               >
                 <Github className="w-5 h-5" /> GitHub

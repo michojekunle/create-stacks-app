@@ -76,6 +76,7 @@ export function Hero() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
               href="/docs"
+              aria-label="Get Started with Documentation"
               className="bg-white text-black px-8 py-4 rounded-2xl font-bold shadow-[0_16px_40px_-12px_rgba(255,255,255,0.25)] hover:-translate-y-0.5 hover:shadow-[0_20px_50px_-12px_rgba(255,255,255,0.35)] transition-all flex items-center justify-center gap-2.5 text-sm group"
             >
               Get Started
@@ -85,6 +86,7 @@ export function Hero() {
               href="https://github.com/michojekunle/create-stacks-app"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Star Create Stacks App on GitHub"
               className="px-8 py-4 rounded-2xl font-bold border border-white/10 text-gray-300 hover:text-white hover:bg-white/5 transition-all text-sm flex items-center justify-center gap-2.5 shadow-sm group"
             >
               <Github className="w-4 h-4" /> Star on GitHub

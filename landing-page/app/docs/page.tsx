@@ -1,4 +1,37 @@
 import { CopyButton } from "@/components/copy-button";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Documentation",
+  description:
+    "Comprehensive documentation for Create Stacks App. Learn how to scaffold, develop, and deploy full-stack applications on the Stacks blockchain.",
+  alternates: {
+    canonical: "https://create-stacksapp.vercel.app/docs",
+  },
+  openGraph: {
+    title: "Documentation | Create Stacks App",
+    description:
+      "Comprehensive documentation for Create Stacks App. Learn how to scaffold, develop, and deploy full-stack applications on the Stacks blockchain.",
+    url: "https://create-stacksapp.vercel.app/docs",
+    images: [
+      {
+        url: "/api/og?title=Official%20Documentation&description=Learn%20how%20to%20scaffold,%20develop,%20and%20deploy%20full-stack%20applications%20on%20the%20Stacks%20blockchain.",
+        width: 1200,
+        height: 630,
+        alt: "Create Stacks App Documentation",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Documentation | Create Stacks App",
+    description:
+      "Comprehensive documentation for Create Stacks App. Learn how to scaffold, develop, and deploy full-stack applications on the Stacks blockchain.",
+    images: [
+      "/api/og?title=Official%20Documentation&description=Learn%20how%20to%20scaffold,%20develop,%20and%20deploy%20full-stack%20applications%20on%20the%20Stacks%20blockchain.",
+    ],
+  },
+};
 
 function CodeBlock({ title, code }: { title?: string; code: string }) {
   return (
@@ -51,8 +84,29 @@ function InfoCard({
 }
 
 export default function DocsPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    headline: "Create Stacks App Documentation",
+    description:
+      "Comprehensive documentation for Create Stacks App. Learn how to scaffold, develop, and deploy full-stack applications on the Stacks blockchain.",
+    author: {
+      "@type": "Person",
+      name: "Michael Ojekunle",
+      url: "https://twitter.com/devvmichael",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Create Stacks App",
+    },
+  };
+
   return (
     <div className="space-y-20 mt-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Header */}
       <div className="space-y-4">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-stacks-orange text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
