@@ -12,6 +12,7 @@ _Focus: Upgrading the foundational templates to support the biggest upcoming Sta
 
 - [ ] **Nakamoto-Ready Templates:** Implement frontend templates that showcase optimistic UI updates and gracefully handle the new ~5 second block times.
 - [ ] **sBTC-Ready Applications:** Create templates specifically designed to handle trustless Bitcoin deposits and withdrawals (sBTC) out of the box.
+- [ ] **USDCx Applications:** Scaffold dApps pre-configured with the standard Bridged USDC (USDCx) token contract integration for stablecoin economies.
 - [ ] **Advanced Smart Contract Boilerplates:** Expand beyond simple Counter and Token templates. Introduce DAOs (ExecutorDAO standard), automated market makers (AMMs), staking pools, and Multi-sig wallet boilerplates.
 
 ## 🛠 Phase 2: Professional Developer Experience (DX) (Month 3-4)
@@ -21,6 +22,7 @@ _Focus: Tooling that scales from hackathons to enterprise production._
 - [ ] **Stacks.js Type Generation:** Automatically configure scripts that generate TypeScript types directly from the Clarity smart contracts, providing 100% end-to-end type safety between the frontend and the blockchain.
 - [ ] **Monorepo Architecture (Turborepo):** Introduce a `--monorepo` flag that creates a Turborepo workspace, keeping the API, frontend, and Clarinet workspace strictly separated but easily manageable.
 - [ ] **Pre-configured CI/CD Pipelines:** Auto-generate GitHub Actions `.yml` files that automatically run Clarinet tests on push and suggest deployments to Vercel/Netlify.
+- [ ] **Rendezvous Fuzz Testing:** Include pre-built Fuzz testing templates utilizing Rendezvous to securely battle-test Clarity contracts.
 
 ## 🎨 Phase 3: Modern UI & Web3 Integrations (Month 4-5)
 

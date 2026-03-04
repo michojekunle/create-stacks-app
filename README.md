@@ -34,10 +34,12 @@ npm run dev
 - [x] **CLI Add Command** - Add contracts to existing projects
 - [x] **CLI Deploy Command** - One-command testnet/mainnet deployment
 - [ ] **sBTC Integration** - Native support for Bitcoin-backed assets
+- [ ] **USDCx Templates** - Pre-configured boilerplate for USDC stablecoin integration
 - [ ] **Type Generation** - End-to-end type safety from Clarity code
 - [ ] **Turborepo Scaffold** - High-performance monorepo option
 - [ ] **Shadcn/UI** - Optional UI component library injection
 - [ ] **CI/CD Pipelines** - Auto-generated GitHub Actions
+- [ ] **Fuzz Testing** - Rendezvous fuzz testing templates for Clarity contracts
 - [ ] **AI Boilerplate** - Experimental `--ai` flag for contract generation
 
 See the full [3-6 Month Roadmap](ROADMAP.md) for more details.
