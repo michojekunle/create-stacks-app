@@ -43,6 +43,10 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  other: {
+    "talentapp:project_verification":
+      "6fb92959083ba836af2006ec9ff88514fe7996848133bbdb6be842bbe348d2257f8d42077c4a102d8231cdcffcc85e792b4bf539d057108af842af2e20867d2f",
+  },
 };
 
 export default function RootLayout({
