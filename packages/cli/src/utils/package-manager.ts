@@ -45,6 +45,22 @@ export async function installDependencies(
   }
 }
 
+export async function installShadcn(projectPath: string): Promise<void> {
+  console.log("Initializing shadcn/ui...");
+
+  try {
+    await runCommand(
+      "npx",
+      ["shadcn@latest", "init", "-d"],
+      `${projectPath}/frontend`,
+    );
+    console.log("shadcn/ui initialized properly");
+  } catch (error) {
+    console.error("Failed to initialize shadcn/ui");
+    throw error;
+  }
+}
+
 export function getRunCommand(pm: PackageManager, script: string): string {
   const commands: Record<PackageManager, string> = {
     npm: `npm run ${script}`,
@@ -55,7 +71,7 @@ export function getRunCommand(pm: PackageManager, script: string): string {
   return commands[pm];
 }
 
-function runCommand(
+export function runCommand(
   command: string,
   args: string[],
   cwd: string,

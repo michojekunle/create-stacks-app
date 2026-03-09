@@ -29,6 +29,8 @@ program
   .option("--no-typescript", "Use JavaScript")
   .option("--tailwind", "Include Tailwind CSS")
   .option("--no-tailwind", "Skip Tailwind CSS")
+  .option("--shadcn", "Include shadcn/ui components")
+  .option("--no-shadcn", "Skip shadcn/ui components")
   .option("--no-git", "Skip Git initialization")
   .option("--package-manager <pm>", "Package manager (npm, pnpm, yarn)")
   .option("--skip-install", "Skip dependency installation")

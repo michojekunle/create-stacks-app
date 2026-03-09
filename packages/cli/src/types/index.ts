@@ -5,6 +5,7 @@ export interface CreateOptions {
   contracts?: string;
   typescript?: boolean;
   tailwind?: boolean;
+  shadcn?: boolean;
   git?: boolean;
   packageManager?: PackageManager;
   skipInstall?: boolean;
@@ -18,6 +19,7 @@ export interface ProjectConfig {
   typescript: boolean;
   contracts: string[];
   tailwind: boolean;
+  shadcn: boolean;
   git: boolean;
   packageManager: PackageManager;
   skipInstall: boolean;

@@ -28,10 +28,10 @@ _Focus: Tooling that scales from hackathons to enterprise production._
 
 _Focus: Helping developers ship beautiful, functional dApps faster._
 
-- [ ] **UI Framework Options:** Allow developers to inject popular styling libraries on setup (e.g., `create-stacks-app --tailwind --shadcn`).
+- [x] **UI Framework Options:** Allow developers to inject popular styling libraries on setup (e.g., `create-stacks-app --tailwind --shadcn`).
 - [x] **Pre-built Web3 Components:** Generate frontends with a working, beautifully styled `<ConnectWallet />` button that natively handles Leather, and Xverse wallets perfectly.
 - [x] **Custom React Hooks Integration:** Provide well-documented, boilerplate custom hooks like `useStacks()`, `useContractCall()`, and `useContractRead()`.
-- [ ] **useSbtcBalance() Hook:** Support for upcoming sBTC integration.
+- [x] **useSbtcBalance() Hook:** Support for sBTC integration.
 
 ## 🤖 Phase 4: Innovation & Edge Features (Month 5-6)
 

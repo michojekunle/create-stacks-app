@@ -91,6 +91,18 @@ export async function runPrompts(
     },
     {
       type: "confirm",
+      name: "shadcn",
+      message: "Include shadcn/ui?",
+      default: true,
+      when: (currentAnswers) => {
+        if (options?.shadcn !== undefined) {
+          return false;
+        }
+        return currentAnswers.tailwind !== false && options?.tailwind !== false;
+      },
+    },
+    {
+      type: "confirm",
       name: "git",
       message: "Initialize Git repository?",
       default: true,
@@ -121,6 +133,9 @@ export async function runPrompts(
     contracts: answers.contracts ||
       options?.contracts?.split(",") || ["counter"],
     tailwind: answers.tailwind ?? options?.tailwind ?? true,
+    shadcn:
+      (answers.shadcn ?? options?.shadcn ?? true) &&
+      (answers.tailwind ?? options?.tailwind ?? true),
     git: answers.git ?? options?.git !== false,
     packageManager: (answers.packageManager ||
       options?.packageManager ||
@@ -141,6 +156,7 @@ export async function getDefaultConfig(
     typescript: options?.typescript ?? true,
     contracts: options?.contracts?.split(",") || ["counter"],
     tailwind: options?.tailwind ?? true,
+    shadcn: (options?.shadcn ?? true) && (options?.tailwind ?? true),
     git: options?.git !== false,
     packageManager: (options?.packageManager as PackageManager) || defaultPM,
     skipInstall: options?.skipInstall || false,
