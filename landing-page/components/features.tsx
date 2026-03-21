@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Zap, Shield, Code2, Box, Smartphone, Globe } from "lucide-react";
+import { Zap, Shield, Code2, Bitcoin, Smartphone, Globe, Github } from "lucide-react";
 
 const features = [
   {
@@ -26,10 +26,10 @@ const features = [
     gradient: "from-green-500/20 to-emerald-500/20",
   },
   {
-    icon: Box,
-    title: "Monorepo Structure",
+    icon: Bitcoin,
+    title: "sBTC & Bitcoin L2",
     description:
-      "Clean separation of contracts and frontend. Develop, test, and deploy each independently.",
+      "Native sBTC integration. Scaffolding for trustless Bitcoin-backed applications with pre-built hooks for balance and deposits.",
     gradient: "from-pink-500/20 to-rose-500/20",
   },
   {
@@ -41,9 +41,9 @@ const features = [
   },
   {
     icon: Globe,
-    title: "Multi-Network",
+    title: "UI & shadcn/ui",
     description:
-      "CLI deploy command for Testnet and Mainnet. Clarinet Devnet for local development. Switch with env vars.",
+      "Optionally inject shadcn/ui. Built-in professional dark-mode aesthetics with Tailwind CSS v4 support.",
     gradient: "from-cyan-500/20 to-blue-500/20",
   },
 ];

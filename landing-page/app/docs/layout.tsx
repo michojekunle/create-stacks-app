@@ -44,6 +44,10 @@ const docsNav = [
       { href: "#custom-templates", label: "Contributing" },
     ],
   },
+  {
+    title: "Releases",
+    items: [{ href: "/docs/changelog", label: "Changelog" }],
+  },
 ];
 
 export default function DocsLayout({

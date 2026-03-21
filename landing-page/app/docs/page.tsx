@@ -649,6 +649,51 @@ export function useContractCall(
             />
           </div>
         </div>
+
+        {/* sBTC Hooks */}
+        <div id="sbtc-hooks" className="scroll-mt-24 space-y-8">
+          <div>
+            <h3 className="text-xl font-bold text-white flex items-center gap-3 mb-4">
+              sBTC Native Hooks (v0.2.43+)
+            </h3>
+            <p className="text-gray-400 font-light leading-relaxed">
+              v0.2.43 introduces native support for <strong>sBTC</strong>, the trustless Bitcoin-backed asset on Stacks. These hooks handle everything from balance lookups to complex Bitcoin peg-in (deposit) flows.
+            </p>
+          </div>
+
+          <div className="space-y-10">
+            {/* useSbtcBalance */}
+            <div>
+              <h4 className="text-lg font-bold mb-3 text-white">useSbtcBalance() — Token Balance</h4>
+              <p className="text-gray-400 text-sm font-light mb-4 leading-relaxed">
+                A specialized utility to fetch the sBTC balance for any Stacks address. It automatically targets the official sBTC contract on the selected network.
+              </p>
+              <CodeBlock
+                title="hooks/use-sbtc-balance.ts"
+                code={`const { balance, isLoading, error } = useSbtcBalance(address);`}
+              />
+            </div>
+
+            {/* useSbtcDeposit */}
+            <div>
+              <h4 className="text-lg font-bold mb-3 text-white">useSbtcDeposit() — Peg-in Flow</h4>
+              <p className="text-gray-400 text-sm font-light mb-4 leading-relaxed">
+                Provides a <code className="text-stacks-orange bg-white/5 px-1.5 py-0.5 rounded">depositSbtc</code> function that orchestrates the entire peg-in process:
+                generating the P2TR address, signing the BTC transaction via the wallet, and notifying the sBTC signers.
+              </p>
+              <CodeBlock
+                title="hooks/use-sbtc-deposit.ts"
+                code={`const { depositSbtc, isLoading, txId } = useSbtcDeposit();
+
+// Usage
+await depositSbtc({
+  amountSats: 100000, // 0.001 BTC
+  stacksAddress: "ST123...",
+});`}
+              />
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Contract Config */}
