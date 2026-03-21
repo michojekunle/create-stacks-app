@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.43] - 2026-03-21
+
+### Added
+
+- **sBTC Integration**: Native support for Bitcoin-backed assets (sBTC) out of the box.
+- **`useSbtcBalance` Hook**: Added a pre-configured hook for Next.js and React templates to instantly fetch a user's sBTC balance.
+- **`useSbtcDeposit` Hook**: Added a comprehensive hook that handles the complete end-to-end peg-in flow (building P2TR address, signing BTC transfer, and signers notification via Emily API).
+- **shadcn/ui Support**: Integrated the popular shadcn/ui component library as an optional selection during CLI project setup (`--shadcn`).
+- **Conditional UI Logic**: The CLI now intelligently suggests shadcn/ui only when Tailwind CSS is enabled, ensuring compatible styling environments.
+
+### Changed
+
+- **sBTC Library Dependency**: Generated projects now include the `sbtc` npm package by default to power advanced Bitcoin-on-Stacks interactions.
+- **CLI Prompts**: Updated the interactive project generator to include the new UI framework selection flow.
+
+### Fixed
+
+- **Template Dependency Sync**: Synchronized React and Next.js `package.json` templates to ensure all Stacks.js v8+ and sBTC alpha dependencies are correctly locked for stability.
+- **Optional Flag Handling**: Fixed a CLI bug where certain `--no-*` flags (like `--no-tailwind`) would still incorrectly trigger subsequent dependent prompts.
+
+
 ## [0.2.42] - 2026-02-28
 
 ### Added

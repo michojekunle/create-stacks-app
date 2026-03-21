@@ -1,6 +1,6 @@
 {
   "name": "@devvmichael/create-stacks-app-monorepo",
-  "version": "0.2.42",
+  "version": "0.2.43",
   "private": false,
   "description": "Scaffold full-stack Stacks blockchain applications",
   "scripts": {

@@ -1,6 +1,6 @@
 {
     "name": "@devvmichael/create-stacks-app",
-    "version": "0.2.42",
+    "version": "0.2.43",
     "description": "Scaffold full-stack Stacks blockchain applications",
     "type": "module",
     "main": "./dist/index.js",
