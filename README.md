@@ -6,6 +6,9 @@ The fastest way to build full-stack applications on Stacks blockchain.
 [![CI](https://github.com/michojekunle/create-stacks-app/actions/workflows/ci.yml/badge.svg)](https://github.com/michojekunle/create-stacks-app/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+<img width="1487" height="841" alt="Screenshot 2026-03-30 at 05 42 41" src="https://github.com/user-attachments/assets/3297d09b-4519-4707-8012-7faab962cf5b" />
+
+
 ## Quick Start
 
 ```bash
